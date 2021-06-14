@@ -1,26 +1,14 @@
 package Modelo;
 
-import Auxiliar.Consts;
-import Auxiliar.Desenhador;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.io.IOException;
 import java.io.Serializable;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 /**
  *
- * @author Junio
+ * @author jackal
  */
-
-///CRIAR CLASSES REFERENTES AOS ITENS DO JOGO
-public class CoronaVirus extends Elemento implements Serializable{
+public class Monster  extends Elemento implements Serializable {
     private boolean bRight;
 
-    public CoronaVirus(String sNomeImagePNG) {
+    public Monster(String sNomeImagePNG) {
         super(sNomeImagePNG);
         bRight = true;
         this.bTransponivel = false;
