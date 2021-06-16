@@ -181,6 +181,17 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         repaint();*/
     }
 
+    public boolean ehPosicaoValida(Posicao umaPosicao){
+        return cControle.ehPosicaoValida(this.eElementos, umaPosicao);   
+    }
+
+    public boolean ehPosicaoValidaRelativaUmPersonagem(Element unPersonagem){
+        return cControle.ehPosicaoValidaRelativaUmPersonagem(this.eElementos, unPersonagem);
+    }
+
+    public ControleDeJogo getControle(){
+        return this.cControle;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
