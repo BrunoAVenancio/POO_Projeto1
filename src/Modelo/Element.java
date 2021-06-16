@@ -14,16 +14,18 @@ import javax.swing.ImageIcon;
  *
  * @author Junio
  */
-public abstract class Elemento implements Serializable {
+public abstract class Element implements Serializable {
 
     protected ImageIcon iImage;
     protected Posicao pPosicao;
     protected boolean bTransponivel; /*Pode passar por cima?*/
+    protected boolean bColecionavel;
     protected boolean bMortal;       /*Se encostar, morre?*/
        
-    protected Elemento(String sNomeImagePNG) {
+    protected Element(String sNomeImagePNG) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
+        this.bColecionavel = false;
         this.bMortal = false;
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);

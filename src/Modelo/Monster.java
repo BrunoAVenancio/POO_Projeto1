@@ -1,15 +1,17 @@
 package Modelo;
 
+import Auxiliar.*;
 import java.io.Serializable;
 /**
  *
  * @author jackal
  */
-public class Monster  extends Elemento implements Serializable {
+public class Monster  extends Element implements Serializable {
     private boolean bRight;
 
-    public Monster(String sNomeImagePNG) {
-        super(sNomeImagePNG);
+    public Monster(Posicao P1) {
+        super(Consts.MONSTER1IMAGE);
+        this.setPosicao(P1.getLinha(), P1.getColuna());
         bRight = true;
         this.bTransponivel = false;
     }
