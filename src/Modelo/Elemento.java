@@ -17,22 +17,49 @@ import javax.swing.ImageIcon;
  */
 public abstract class Elemento implements Serializable {
 
-    protected ImageIcon iImage;
+    protected ImageIcon[] iImages;
+    protected int iCurrentImage;
     protected Posicao pPosicao;
-    protected boolean bTransponivel; /*Pode passar por cima?*/
-    protected boolean bMortal;       /*Se encostar, morre?*/
-       
+    protected boolean bTransponivel;
+    /*Pode passar por cima?*/
+    protected boolean bMortal;
+
+    /*Se encostar, morre?*/
+
+    protected Elemento(String[] sNomeImagePNG) {
+        this.pPosicao = new Posicao(1, 1);
+        this.bTransponivel = true;
+        this.bMortal = false;
+        iCurrentImage = 0;
+        iImages = new ImageIcon[4];
+        try {
+            for (int i = 0; i < sNomeImagePNG.length; i++) {
+                iImages[i] = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
+                Image img = iImages[iCurrentImage].getImage();
+                BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+                Graphics g = bi.createGraphics();
+                g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                iImages[iCurrentImage] = new ImageIcon(bi);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     protected Elemento(String sNomeImagePNG) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
         this.bMortal = false;
+        iCurrentImage = 0;
+        iImages = new ImageIcon[4];
         try {
-            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
-            Image img = iImage.getImage();
+            iImages[iCurrentImage] = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
+            Image img = iImages[iCurrentImage].getImage();
             BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
             Graphics g = bi.createGraphics();
             g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-            iImage = new ImageIcon(bi);
+            iImages[iCurrentImage] = new ImageIcon(bi);
+
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -40,6 +67,14 @@ public abstract class Elemento implements Serializable {
 
     public Posicao getPosicao() {
         return pPosicao;
+    }
+
+    public int getiCurrentImage() {
+        return iCurrentImage;
+    }
+
+    public void setiCurrentImage(int iCurrentImage) {
+        this.iCurrentImage = iCurrentImage;
     }
 
     public boolean isbTransponivel() {
@@ -69,8 +104,8 @@ public abstract class Elemento implements Serializable {
     public boolean moveLeft() {
         return this.pPosicao.moveLeft();
     }
-    
-   public void autoDesenho(){
-        Desenhador.desenhar(this.iImage, pPosicao.getColuna(), pPosicao.getLinha());        
-    }    
+
+    public void autoDesenho() {
+        Desenhador.desenhar(this.iImages[iCurrentImage], pPosicao.getColuna(), pPosicao.getLinha());
+    }
 }

@@ -15,11 +15,27 @@ import javax.swing.JPanel;
  * @author Junio
  */
 public class Hero extends Elemento implements Serializable{
-    public Hero(String sNomeImagePNG) {
+    private int iAlternancia;
+    private int iIncremento;
+    
+    public Hero(String[] sNomeImagePNG) {
         super(sNomeImagePNG);
+        iAlternancia = 0;
+        iIncremento = 1;
     }
 
     public void voltaAUltimaPosicao(){
         this.pPosicao.volta();
+    }
+    
+    public void autoDesenho(){
+        this.setiCurrentImage(iAlternancia);
+        iAlternancia += iIncremento;
+        if(iAlternancia == 2){
+            iIncremento = -1;
+        }else if(iAlternancia == 0){
+            iIncremento = 1;
+        }
+        super.autoDesenho();
     }
 }

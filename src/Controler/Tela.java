@@ -7,7 +7,6 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.*;
-import java.util.zip.*;
 /**
  *
  * @author junio
@@ -16,6 +15,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
     private Hero hHero;
     private ArrayList<Elemento> eElementos;
+    private Fases Fase;
     private ControleDeJogo cControle = new ControleDeJogo();
     private Graphics g2;
     /**
@@ -33,16 +33,22 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
 
         /*Este array vai guardar os elementos graficos*/
-        eElementos = new ArrayList<Elemento>(100);
-
-    
+        eElementos = new ArrayList<Elemento>(150);
+        String[] arrayDeImagens = new String[3];
+        arrayDeImagens[0] = "Skooter1.png";
+        arrayDeImagens[1] = "Skooter3.png";
+        arrayDeImagens[2] = "Skooter2.png";
+        
         /*Cria eElementos adiciona elementos*/
         /*O protagonista (heroi) necessariamente precisa estar na posicao 0 do array*/
-        hHero = new Hero("skooter_hero.png"); /* https://www.online-image-editor.com/ */
-        hHero.setPosicao(0, 7);
-        this.addElemento(hHero);
+        hHero = new Hero(arrayDeImagens); /* https://www.online-image-editor.com/ */
+        hHero.setPosicao(4, 4);
+                
+        Fase = new Fases(150);
+        Fase.setFase1(hHero);
+        eElementos = Fase;
         
-        CoronaVirus cTeste = new CoronaVirus("robo_azul.png");
+        /*CoronaVirus cTeste = new CoronaVirus("robo_azul.png");
         cTeste.setPosicao(5, 5);
         this.addElemento(cTeste);     
 
@@ -56,7 +62,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         
         Caveira cCaveira = new Caveira("caveira.png");
         cCaveira.setPosicao(10, 9);
-        this.addElemento(cCaveira);        
+        this.addElemento(cCaveira); */       
     }
 
 /*--------------------------------------------------*/
@@ -83,7 +89,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             for (int j = 0; j < Consts.RES; j++) {
                 try {
                     /*Linha para alterar o background*/
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background.png");
+                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background.png");
                     g2.drawImage(newImage,j*Consts.CELL_SIDE, i*Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
 
                 } catch (IOException ex) {
@@ -127,15 +133,15 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             hHero.moveLeft();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             hHero.moveRight();
-        } else if (e.getKeyCode() == KeyEvent.VK_R) {
-            this.eElementos.clear();
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            /*this.eElementos.clear();
             hHero = new Hero("vacina.png");
             hHero.setPosicao(0, 7);
             this.addElemento(hHero);
 
             CoronaVirus cTeste = new CoronaVirus("carro_azul.png");
             cTeste.setPosicao(5, 5);
-            this.addElemento(cTeste);
+            this.addElemento(cTeste);*/
         }
         
         /*Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava*/
