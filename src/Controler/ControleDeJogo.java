@@ -39,4 +39,29 @@ public class ControleDeJogo {
         }
         return true;
     }
+    
+    public boolean ehPosicaoValidaRelativoUmPersonagem(ArrayList<Elemento> e, Elemento unElemento ){
+        Elemento eTemp;
+        /*Validacao da posicao de todos os elementos com relacao a Posicao p*/
+        for(int i = 1; i < e.size(); i++){ /*Olha todos os elementos*/
+            eTemp = e.get(i); /*Pega o i-esimo elemento do jogo*/
+            if(eTemp == unElemento)
+                continue;
+            if(!eTemp.isbTransponivel())
+                if(eTemp.getPosicao().estaNaMesmaPosicao(unElemento.getPosicao()))
+                    return false; /*A posicao p é invalida, pois ha um elemento (i-esimo eTemp) intransponivel lá*/
+        }
+        return true;
+    }
+    
+    public boolean isThere(ArrayList<Elemento> e, Elemento unElemento ){
+        Elemento eTemp;
+        /*Validacao da posicao de todos os elementos com relacao a Posicao p*/
+        for(int i = 1; i < e.size(); i++){ /*Olha todos os elementos*/
+            eTemp = e.get(i); /*Pega o i-esimo elemento do jogo*/
+            if(eTemp == unElemento)
+                return true; /*A posicao p é invalida, pois ha um elemento (i-esimo eTemp) intransponivel lá*/
+        }
+        return false;
+    }
 }
