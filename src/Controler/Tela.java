@@ -34,18 +34,17 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
         /*Este array vai guardar os elementos graficos*/
         eElementos = new ArrayList<Elemento>(150);
-        String[] arrayDeImagens = new String[3];
+        /*String[] arrayDeImagens = new String[3];
         arrayDeImagens[0] = "Skooter1.png";
         arrayDeImagens[1] = "Skooter3.png";
-        arrayDeImagens[2] = "Skooter2.png";
+        arrayDeImagens[2] = "Skooter2.png";*/
         
         /*Cria eElementos adiciona elementos*/
         /*O protagonista (heroi) necessariamente precisa estar na posicao 0 do array*/
-        hHero = new Hero(arrayDeImagens); /* https://www.online-image-editor.com/ */
-        hHero.setPosicao(4, 4);
+        hHero = new Hero("Skooter1.png"); /* https://www.online-image-editor.com/ */
                 
         Fase = new Fases(150);
-        Fase.setFase1(hHero);
+        Fase.setFase4(hHero);
         eElementos = Fase;
         
         /*CoronaVirus cTeste = new CoronaVirus("robo_azul.png");
@@ -145,15 +144,23 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         }
         
         /*Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava*/
-        if (!cControle.ehPosicaoValida(this.eElementos,hHero.getPosicao())) {
+        if (!cControle.ehPosicaoValidaRelativoUmPersonagem(this.eElementos,hHero)) {
             hHero.voltaAUltimaPosicao();
         }
 
         this.setTitle("-> Cell: " + (hHero.getPosicao().getColuna()) + ", " + (hHero.getPosicao().getLinha()));
     }
 
+    public boolean ehPosicaoValidaRelativoUmPersonagem(Elemento unPersona ){
+       return cControle.ehPosicaoValidaRelativoUmPersonagem(this.eElementos, unPersona);
+    }
+    
+    public boolean ehPosicaoValida(Posicao P1){
+        return cControle.ehPosicaoValida(this.eElementos, P1);
+    }
+    
     public void mousePressed(MouseEvent e) {
-         //Movimento via mouse
+         /*//Movimento via mouse
          int x = e.getX();
          int y = e.getY();
      
@@ -162,12 +169,12 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         
          this.hHero.getPosicao().setPosicao(y/Consts.CELL_SIDE, x/Consts.CELL_SIDE);
 
-        /*Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava*/
+        //Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava
         if (!cControle.ehPosicaoValida(this.eElementos,hHero.getPosicao())) {
             hHero.voltaAUltimaPosicao();
         }         
          
-        repaint();
+        repaint();*/
     }
 
     /**

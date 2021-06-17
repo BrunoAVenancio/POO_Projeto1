@@ -15,13 +15,14 @@ import javax.swing.JPanel;
  * @author Junio
  */
 public class Hero extends Elemento implements Serializable{
-    private int iAlternancia;
-    private int iIncremento;
+    //private int iAlternancia;
+    //private int iIncremento;
     
-    public Hero(String[] sNomeImagePNG) {
+    public Hero(String sNomeImagePNG) {
         super(sNomeImagePNG);
-        iAlternancia = 0;
-        iIncremento = 1;
+        //iAlternancia = 0;
+        //iIncremento = 1;
+        this.bTransponivel = false;
     }
 
     public void voltaAUltimaPosicao(){
@@ -29,13 +30,13 @@ public class Hero extends Elemento implements Serializable{
     }
     
     public void autoDesenho(){
-        this.setiCurrentImage(iAlternancia);
+       /* this.setiCurrentImage(iAlternancia);
         iAlternancia += iIncremento;
         if(iAlternancia == 2){
             iIncremento = -1;
         }else if(iAlternancia == 0){
             iIncremento = 1;
-        }
+        }*/
         super.autoDesenho();
     }
 }

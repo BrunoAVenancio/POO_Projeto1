@@ -19,6 +19,7 @@ public class Robo extends Elemento  implements Serializable{
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
+        this.bMortal = true;
         r = new Random();
     }
     
@@ -39,6 +40,9 @@ public class Robo extends Elemento  implements Serializable{
                 break;
         }
        
+        if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
+            this.getPosicao().volta();
+        }
         super.autoDesenho();
         
     }

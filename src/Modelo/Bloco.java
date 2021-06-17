@@ -5,15 +5,15 @@
  */
 package Modelo;
 
-import Auxiliar.*;
+import Auxiliar.Posicao;
 
 /**
  *
  * @author jackal
  */
-public class QuadradoVermelho extends Elemento{
-    public QuadradoVermelho(Posicao P1){
-        super("quadradovermelho.png");
+public class Bloco extends Elemento {
+    public Bloco(String sNomeImagePNG, Posicao P1){
+        super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
         

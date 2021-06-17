@@ -5,18 +5,19 @@
  */
 package Modelo;
 
-import Auxiliar.Posicao;
+import Auxiliar.*;
 
 /**
  *
  * @author jackal
  */
-public class BlocoVerde extends Elemento {
-    public BlocoVerde(Posicao P1){
-        super("BlocoVerde.png");
+public class Seta extends Elemento{
+    private int direcao;
+    public Seta(String sNomeImagePNG, Posicao P1, int nDirecao){
+        super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
-        
+        direcao = nDirecao;
     }
     
     public void voltaAUltimaPosicao(){

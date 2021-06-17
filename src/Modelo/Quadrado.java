@@ -11,9 +11,9 @@ import Auxiliar.*;
  *
  * @author jackal
  */
-public class QuadradoVerde extends Elemento{
-    public QuadradoVerde(Posicao P1){
-        super("quadradoverde.png");
+public class Quadrado extends Elemento{
+    public Quadrado(String sNomeImagePNG, Posicao P1){
+        super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
         
