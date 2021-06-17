@@ -2,6 +2,7 @@ package Modelo;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenhador;
+import Controler.Tela;
 import Auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -14,18 +15,16 @@ import javax.swing.ImageIcon;
  *
  * @author Junio
  */
-public abstract class Element implements Serializable {
+public abstract class Elemento implements Serializable {
 
     protected ImageIcon iImage;
     protected Posicao pPosicao;
     protected boolean bTransponivel; /*Pode passar por cima?*/
-    protected boolean bColecionavel;
     protected boolean bMortal;       /*Se encostar, morre?*/
        
-    protected Element(String sNomeImagePNG) {
+    protected Elemento(String sNomeImagePNG) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
-        this.bColecionavel = false;
         this.bMortal = false;
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);

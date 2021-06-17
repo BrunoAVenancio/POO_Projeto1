@@ -1,35 +1,25 @@
 package Modelo;
 
-import Auxiliar.*;
+import Auxiliar.Consts;
+import Auxiliar.Desenhador;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.io.IOException;
 import java.io.Serializable;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Junio
  */
-public class Hero extends Element implements Serializable{
-    private int direction;
+public class Hero extends Elemento implements Serializable{
     public Hero(String sNomeImagePNG) {
         super(sNomeImagePNG);
-        direction = 0;
     }
 
     public void voltaAUltimaPosicao(){
         this.pPosicao.volta();
     }
-    
-    /*public void colocarBomba(){
-        Bomba Bomba1 = new Bomba(Consts.BOMBIMAGE);
-        Bomba1.setPosicao(this.getPosicao().getLinha(), this.getPosicao().getColuna());
-    }*/
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-    
-    
 }
