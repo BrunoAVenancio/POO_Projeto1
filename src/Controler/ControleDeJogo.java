@@ -116,23 +116,39 @@ public class ControleDeJogo {
         for(int i = 1; i < e.size(); i++){ 
             eTemp = e.get(i); 
             if(eTemp.isbMovel() && unHero.getbDirecao() == 0){
-                if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha()-1 && this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                if(eTemp.getPosicao().getLinha() == (unHero.getPosicao().getLinha()-1) && eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna()){
                     e.get(i).setPosicao(eTemp.getPosicao().getLinha() - 1, eTemp.getPosicao().getColuna());
+                    if(!this.ehPosicaoValidaRelativoUmPersonagem(e, e.get(i))){
+                        e.get(i).getPosicao().volta();
+                        return false;
+                    }
                     return true;
                 }
             }else if(eTemp.isbMovel() && unHero.getbDirecao() == 1){
-                if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha()+1 && this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                if(eTemp.getPosicao().getLinha() == (unHero.getPosicao().getLinha()+1) && eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna() /*&& !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)*/){
                     e.get(i).setPosicao(eTemp.getPosicao().getLinha() + 1, eTemp.getPosicao().getColuna());
+                    if(!this.ehPosicaoValidaRelativoUmPersonagem(e, e.get(i))){
+                        e.get(i).getPosicao().volta();
+                        return false;
+                    }
                     return true;
                 }
             }else if(eTemp.isbMovel() && unHero.getbDirecao() == 2){
-                if(eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna()-1 && this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna()-1) /*&& !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)*/){
                     e.get(i).setPosicao(eTemp.getPosicao().getLinha(), eTemp.getPosicao().getColuna()-1);
+                    if(!this.ehPosicaoValidaRelativoUmPersonagem(e, e.get(i))){
+                        e.get(i).getPosicao().volta();
+                        return false;
+                    }
                     return true;
                 }
             }else if(eTemp.isbMovel()  && unHero.getbDirecao() == 3){
-                if(eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna()+1 && this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna()+1) /*&& !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)*/){
                     e.get(i).setPosicao(eTemp.getPosicao().getLinha(), eTemp.getPosicao().getColuna()+1);
+                    if(!this.ehPosicaoValidaRelativoUmPersonagem(e, e.get(i))){
+                        e.get(i).getPosicao().volta();
+                        return false;
+                    }
                     return true;
                 }
             }
