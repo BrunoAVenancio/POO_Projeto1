@@ -22,6 +22,7 @@ public abstract class Elemento implements Serializable {
     protected boolean bMortal;
     protected boolean bMovel;
     protected int bDirecao;
+    protected boolean bColecional;
 
     /*Se encostar, morre?*/
 
@@ -51,6 +52,7 @@ public abstract class Elemento implements Serializable {
         this.bMortal = false;
         this.bRetiravel = false;
         this.bMovel = false;
+        this.bColecional = false;
         this.bDirecao = 0;
         //iCurrentImage = 0;
         //iImages = new ImageIcon[4];
@@ -71,6 +73,9 @@ public abstract class Elemento implements Serializable {
         return pPosicao;
     }
 
+    public boolean isbColecional() {
+        return bColecional;
+    }
     
     public int getiCurrentImage() {
         return iCurrentImage;
@@ -113,6 +118,7 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveUp() {
+        this.bDirecao = 0;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
@@ -121,6 +127,7 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveDown() {
+        this.bDirecao = 1;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
@@ -129,6 +136,7 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveRight() {
+        this.bDirecao = 3;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
@@ -138,6 +146,7 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveLeft() {
+        this.bDirecao = 2;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;

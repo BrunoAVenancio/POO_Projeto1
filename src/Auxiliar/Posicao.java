@@ -47,6 +47,7 @@ public class Posicao implements Serializable{
     }
     
     public boolean moveUp(){
+        
         return this.setPosicao(this.getLinha()-1, this.getColuna());
     }
     public boolean moveDown(){

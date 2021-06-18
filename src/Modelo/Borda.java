@@ -5,18 +5,17 @@
  */
 package Modelo;
 
-import Auxiliar.Posicao;
+import Auxiliar.*;
 
 /**
  *
  * @author jackal
  */
-public class FrutasConsumiveis extends Elemento {
-    public FrutasConsumiveis(String sNomeImagePNG, Posicao P1){
+public class Borda extends Elemento {
+    public Borda(String sNomeImagePNG, Posicao P1){
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
-        this.bRetiravel = true;
-        this.bColecional = true;
+        
     }
     
     public void voltaAUltimaPosicao(){

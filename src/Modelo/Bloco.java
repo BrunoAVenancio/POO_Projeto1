@@ -16,7 +16,7 @@ public class Bloco extends Elemento {
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
-        this.bRetiravel = false;
+        this.bRetiravel = true;
         this.bMovel = true;
         
     }

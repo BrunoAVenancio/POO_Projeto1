@@ -14,11 +14,22 @@ import java.util.ArrayList;
  * @author jackal
  */
 public class Fases extends ArrayList<Elemento>{
+    private int numFase = 0;
     Fases(int Tamanho){
         super(Tamanho);
     }
+
+    public int getNumFase() {
+        return numFase;
+    }
+
+    public void setNumFase(int numFase) {
+        this.numFase = numFase;
+    }
+    
     
     public void setFase1(Hero unHero){
+        numFase = 1;
         this.clear();
        // unHero.setPosicao(4, 4);
         this.add(unHero);
@@ -86,6 +97,7 @@ public class Fases extends ArrayList<Elemento>{
     }
     
     public void setFase2(Hero unHero){
+        numFase = 2;
         this.clear();
       //  unHero.setPosicao(5, 5);
         this.add(unHero);
@@ -156,6 +168,7 @@ public class Fases extends ArrayList<Elemento>{
     }
     
     public void setFase3(Hero unHero){
+        numFase = 3;
         this.clear();
        // unHero.setPosicao(5, 5);
         this.add(unHero);
@@ -221,6 +234,7 @@ public class Fases extends ArrayList<Elemento>{
     }
     
     public void setFase4(Hero unHero){
+        numFase = 4;
         this.clear();
         this.add(unHero);
         //unHero.setPosicao(5, 5);
