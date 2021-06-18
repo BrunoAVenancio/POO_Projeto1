@@ -23,6 +23,7 @@ public class Hero extends Elemento implements Serializable{
         //iAlternancia = 0;
         //iIncremento = 1;
         this.bTransponivel = false;
+        this.bRetiravel = false;
     }
 
     public void voltaAUltimaPosicao(){

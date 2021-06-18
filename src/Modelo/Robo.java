@@ -19,6 +19,7 @@ public class Robo extends Elemento  implements Serializable{
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
+        this.bRetiravel = false;
         this.bMortal = true;
         r = new Random();
     }
@@ -28,18 +29,22 @@ public class Robo extends Elemento  implements Serializable{
         switch(iDirecao){
             case 0:
                 this.moveUp();
+                this.bDirecao = 0;
                 break;
             case 1:
                 this.moveDown();
+                this.bDirecao = 1;
                 break;
             case 2:
                 this.moveRight();
+                this.bDirecao = 2;
                 break;
             case 3:
                 this.moveLeft();
+                this.bDirecao = 3;
                 break;
         }
-       
+        
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
         }

@@ -1,9 +1,6 @@
 package Modelo;
 
-import Auxiliar.Consts;
-import Auxiliar.Desenhador;
-import Controler.Tela;
-import Auxiliar.Posicao;
+import Auxiliar.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -21,8 +18,10 @@ public abstract class Elemento implements Serializable {
     protected int iCurrentImage;
     protected Posicao pPosicao;
     protected boolean bTransponivel;
-    /*Pode passar por cima?*/
+    protected boolean bRetiravel;
     protected boolean bMortal;
+    protected boolean bMovel;
+    protected int bDirecao;
 
     /*Se encostar, morre?*/
 
@@ -50,6 +49,9 @@ public abstract class Elemento implements Serializable {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
         this.bMortal = false;
+        this.bRetiravel = false;
+        this.bMovel = false;
+        this.bDirecao = 0;
         //iCurrentImage = 0;
         //iImages = new ImageIcon[4];
         try {
@@ -69,10 +71,31 @@ public abstract class Elemento implements Serializable {
         return pPosicao;
     }
 
+    
     public int getiCurrentImage() {
         return iCurrentImage;
     }
 
+    public boolean isbMovel() {
+        return bMovel;
+    }
+
+    public boolean isbRetiravel() {
+        return bRetiravel;
+    }
+
+    public boolean isbMortal() {
+        return bMortal;
+    }
+
+    public int getbDirecao() {
+        return bDirecao;
+    }
+
+    public void setbDirecao(int bDirecao) {
+        this.bDirecao = bDirecao;
+    }
+    
     public void setiCurrentImage(int iCurrentImage) {
         this.iCurrentImage = iCurrentImage;
     }
@@ -90,7 +113,6 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveUp() {
-        this.pPosicao.moveUp();
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
@@ -99,7 +121,6 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveDown() {
-        this.pPosicao.moveDown();
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
@@ -108,7 +129,6 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveRight() {
-        this.pPosicao.moveRight();
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
@@ -118,7 +138,6 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveLeft() {
-        this.pPosicao.moveLeft();
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;

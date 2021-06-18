@@ -17,6 +17,7 @@ public class Seta extends Elemento{
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
+        this.bRetiravel = false;
         direcao = nDirecao;
     }
     

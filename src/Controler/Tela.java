@@ -28,6 +28,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);   /*teclado*/
         
+        
         /*Cria a janela do tamanho do cenario + insets (bordas) da janela*/
         this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
                 Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
@@ -42,26 +43,11 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         /*Cria eElementos adiciona elementos*/
         /*O protagonista (heroi) necessariamente precisa estar na posicao 0 do array*/
         hHero = new Hero("Skooter1.png"); /* https://www.online-image-editor.com/ */
-                
+        hHero.setPosicao(4, 4);
+
         Fase = new Fases(150);
-        Fase.setFase4(hHero);
+        Fase.setFase1(hHero);
         eElementos = Fase;
-        
-        /*CoronaVirus cTeste = new CoronaVirus("robo_azul.png");
-        cTeste.setPosicao(5, 5);
-        this.addElemento(cTeste);     
-
-        CoronaVirus cCorona = new CoronaVirus("robo.png");
-        cCorona.setPosicao(3, 3);
-        this.addElemento(cCorona);
-
-        CoronaVirus cRobo = new CoronaVirus("robo_azul.png");
-        cCorona.setPosicao(10, 5);        
-        this.addElemento(cRobo);
-        
-        Caveira cCaveira = new Caveira("caveira.png");
-        cCaveira.setPosicao(10, 9);
-        this.addElemento(cCaveira); */       
     }
 
 /*--------------------------------------------------*/
@@ -125,14 +111,36 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     public void keyPressed(KeyEvent e) {
         /*Movimento do heroi via teclado*/
         if (e.getKeyCode() == KeyEvent.VK_UP) {
+            hHero.setbDirecao(0);
+            cControle.MoverElemento(eElementos, hHero);
             hHero.moveUp();
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            hHero.setbDirecao(1);
+            cControle.MoverElemento(eElementos, hHero);
             hHero.moveDown();
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            hHero.setbDirecao(2);
+            cControle.MoverElemento(eElementos, hHero);
             hHero.moveLeft();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            hHero.setbDirecao(3);
+            cControle.MoverElemento(eElementos, hHero);
             hHero.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            /*switch(hHero.getbDirecao()){
+                case 0:
+                    cControle.RemoveElemento(eElementos, hHero);
+                    break;
+                case 1:
+                    cControle.RemoveElemento(eElementos, hHero);
+                    break;
+                case 2:
+                    cControle.RemoveElemento(eElementos, hHero);
+                    break;
+                case 3:
+                    cControle.RemoveElemento(eElementos, hHero);
+                    break;
+            }*/
             /*this.eElementos.clear();
             hHero = new Hero("vacina.png");
             hHero.setPosicao(0, 7);
@@ -144,7 +152,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         }
         
         /*Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava*/
-        if (!cControle.ehPosicaoValidaRelativoUmPersonagem(this.eElementos,hHero)) {
+        if (!cControle.ehPosicaoValida/*RelativoUmPersonagem*/(this.eElementos,/*hHero*/hHero.getPosicao())) {
             hHero.voltaAUltimaPosicao();
         }
 
@@ -158,6 +166,15 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     public boolean ehPosicaoValida(Posicao P1){
         return cControle.ehPosicaoValida(this.eElementos, P1);
     }
+    
+    
+   /* public boolean RemoveElemento(ArrayList<Elemento> e, Hero unHero, int Direcao ){
+        return cControle.RemoveElemento(this.eElementos, unHero);
+    }
+    
+    public boolean MoverElemento(ArrayList<Elemento> e, Hero unHero, int Direcao ){
+        return cControle.MoverElemento(this.eElementos, unHero);
+    }*/
     
     public void mousePressed(MouseEvent e) {
          /*//Movimento via mouse

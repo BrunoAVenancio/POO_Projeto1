@@ -20,7 +20,7 @@ public class Fases extends ArrayList<Elemento>{
     
     public void setFase1(Hero unHero){
         this.clear();
-        unHero.setPosicao(4, 4);
+       // unHero.setPosicao(4, 4);
         this.add(unHero);
         
         this.add(new Quadrado(Consts.QUADRADOVERMELHO, new Posicao(1,1)));
@@ -87,7 +87,7 @@ public class Fases extends ArrayList<Elemento>{
     
     public void setFase2(Hero unHero){
         this.clear();
-        unHero.setPosicao(5, 5);
+      //  unHero.setPosicao(5, 5);
         this.add(unHero);
         
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(1,3)));
@@ -157,7 +157,7 @@ public class Fases extends ArrayList<Elemento>{
     
     public void setFase3(Hero unHero){
         this.clear();
-        unHero.setPosicao(5, 5);
+       // unHero.setPosicao(5, 5);
         this.add(unHero);
         
         this.add(new Bloco(Consts.BLOCOVERMELHO,new Posicao(1,1)));
@@ -222,8 +222,8 @@ public class Fases extends ArrayList<Elemento>{
     
     public void setFase4(Hero unHero){
         this.clear();
-        unHero.setPosicao(5, 5);
         this.add(unHero);
+        //unHero.setPosicao(5, 5);
         
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(0,3)));
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(0,7)));
