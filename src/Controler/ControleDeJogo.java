@@ -63,31 +63,30 @@ public class ControleDeJogo {
     }
     
         
+    public boolean ehPosicaoValidaAoRobo(ArrayList<Elemento> e,  int linha, int coluna){
+        Elemento eTemp;
+        if(linha < 0 || linha > 10 || coluna < 0 || coluna > 10){
+            return false;
+        }
+        Robo roboTemp = new Robo(Consts.ROBOROSA,new Posicao(linha,coluna));
+        for(int i = 1; i < e.size(); i++){
+            eTemp = e.get(i); 
+            if(!eTemp.isbTransponivel() || eTemp.isbColecional()){
+                if(eTemp.getPosicao().estaNaMesmaPosicao(roboTemp.getPosicao())){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+        
     public boolean MatarHeroi(Hero unHero, Fases fase, Robo unRobo){
-        if(unRobo.getbDirecao() == 0){
-            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha()-1 && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()){
-                fase.setFase1(unHero);
-                return true;
-            }
-        }else if(unRobo.getbDirecao() == 1){
-            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha()+1 && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()){
-                fase.setFase1(unHero);
-                return true;
-            }
-        }else if(unRobo.getbDirecao() == 2){
-            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha() && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()-1){
-                fase.setFase1(unHero);
-                return true;
-            }
-        }else if(unRobo.getbDirecao() == 3){
-            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha() && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()+1){
-                fase.setFase1(unHero);
-                return true;    
-            }
+        if(unHero.getPosicao().estaNaMesmaPosicao(unRobo.getPosicao())){
+            fase.resetarFase(unHero);
+            return true;
         }
         return false;
     }
-    
  /*   public boolean PersonagemMorreu(Elemento eTemp, Hero unHero){
         if(eTemp.getPosicao() == unHero.getPosicao()){
                 if(eTemp.isbMortal())

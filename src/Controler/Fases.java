@@ -311,4 +311,21 @@ public class Fases extends ArrayList<Elemento>{
         numFase = 5;
         this.clear();
     }
+    
+    public void resetarFase(Hero unHero){
+        switch(numFase){
+            case 1:
+                this.setFase1(unHero);
+                break;
+            case 2:
+                this.setFase2(unHero);    
+                break;
+            case 3:
+                this.setFase3(unHero);
+                break;
+            case 4:
+                this.setFase4(unHero);
+                break;
+        }
+    }
 }

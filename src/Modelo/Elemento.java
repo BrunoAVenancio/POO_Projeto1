@@ -24,6 +24,8 @@ public abstract class Elemento implements Serializable {
     protected int bDirecao;
     protected boolean bColecional;
     protected boolean bTravessia;
+    protected boolean bRobo;
+
 
     /*Se encostar, morre?*/
 
@@ -99,7 +101,9 @@ public abstract class Elemento implements Serializable {
     public boolean isbMortal() {
         return bMortal;
     }
-
+    public boolean isbRobo() {
+        return bRobo;
+    }
     public int getbDirecao() {
         return bDirecao;
     }

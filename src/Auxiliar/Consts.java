@@ -11,7 +11,7 @@ public class Consts {
     public static final int RES = 11;
     public static final int FRAME_INTERVAL = 100;   
     public static final int TIMER_DISPARO = 20; /*Em numero de frames (redesenhos)*/
-    public static final int ROBOT_MOVE_FRAME_INTERVAL = 15;
+    public static final int ROBOT_MOVE_FRAME_INTERVAL = 4;
     public static final String PATH = File.separator+"imgs"+File.separator;
     public static final String BORDA = "bricks.png";
     public static final String QUADRADOVERMELHO = "quadradovermelho.png";

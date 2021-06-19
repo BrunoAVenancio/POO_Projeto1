@@ -15,47 +15,57 @@ import java.util.*;
  */
 public class Robo extends Elemento  implements Serializable{
     Random r;
-    int iDirecao = -1;
+    int iDirecao = (new Random()).nextInt(4);
+    int linhaNova;
+    int colunaNova;
+    boolean impacado = false;
     int contadorDeInercia = Auxiliar.Consts.ROBOT_MOVE_FRAME_INTERVAL;
     public Robo(String sNomeImagePNG, Posicao P1){
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
         this.bRetiravel = false;
-        this.bMortal = false;
+        this.bRobo = true;
         r = new Random();
     }
     
-    public void autoDesenho(){
-        if(contadorDeInercia == Auxiliar.Consts.ROBOT_MOVE_FRAME_INTERVAL){
-            iDirecao = r.nextInt(4);
-            switch(iDirecao){
-                case -1:
-                    break;
+    public void posicaoNovaDoRobo(){
+        switch(this.iDirecao){
                 case 0:
-                    this.moveUp();
-                    this.bDirecao = 0;
+                    this.linhaNova--;
                     break;
                 case 1:
-                    this.moveDown();
-                    this.bDirecao = 1;
+                    this.linhaNova++;
                     break;
                 case 2:
-                    this.moveRight();
-                    this.bDirecao = 2;
+                    this.colunaNova--;
                     break;
                 case 3:
-                    this.moveLeft();
-                    this.bDirecao = 3;
+                    this.colunaNova++;
                     break;
             }
-            contadorDeInercia = 0;
-            
-            
+    }
+    
+    public void autoDesenho(){
+        linhaNova = this.pPosicao.getLinha();
+        colunaNova = this.pPosicao.getColuna();
+        
+        this.posicaoNovaDoRobo();
+        while(!Desenhador.getTelaDoJogo().ehPosicaoValidaAoRobo(linhaNova,colunaNova)){
+            //Reseta a posiciao inicial
+            linhaNova = this.pPosicao.getLinha();
+            colunaNova = this.pPosicao.getColuna();
+            int novaDirecao = r.nextInt(4);
+            if(novaDirecao != iDirecao){
+                iDirecao = novaDirecao;
+            }
+            this.posicaoNovaDoRobo();
+            contadorDeInercia++;     
         }
-        Desenhador.getTelaDoJogo().matouHeroi(this);
-        if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
-                this.getPosicao().volta();
+        if(Desenhador.getTelaDoJogo().ehPosicaoValidaAoRobo(linhaNova,colunaNova) && contadorDeInercia > Auxiliar.Consts.ROBOT_MOVE_FRAME_INTERVAL){
+            this.pPosicao.setPosicao(linhaNova, colunaNova);
+            Desenhador.getTelaDoJogo().matouHeroi(this);
+            contadorDeInercia = 0; 
         }
         contadorDeInercia++;     
         super.autoDesenho();
