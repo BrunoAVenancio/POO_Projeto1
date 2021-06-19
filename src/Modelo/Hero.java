@@ -22,7 +22,7 @@ public class Hero extends Elemento implements Serializable{
         super(sNomeImagePNG);
         //iAlternancia = 0;
         //iIncremento = 1;
-        this.bTransponivel = false;
+        this.bTransponivel = true;
         this.bRetiravel = false;
     }
 
@@ -30,7 +30,7 @@ public class Hero extends Elemento implements Serializable{
         this.pPosicao.volta();
     }
     
-    public void autoDesenho(){
+   // public void autoDesenho(){
        /* this.setiCurrentImage(iAlternancia);
         iAlternancia += iIncremento;
         if(iAlternancia == 2){
@@ -38,6 +38,6 @@ public class Hero extends Elemento implements Serializable{
         }else if(iAlternancia == 0){
             iIncremento = 1;
         }*/
-        super.autoDesenho();
-    }
+     /*   super.autoDesenho();
+    }*/
 }

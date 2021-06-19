@@ -1,9 +1,7 @@
 package Controler;
 
-import Auxiliar.Consts;
-import Modelo.Elemento;
-import Modelo.Hero;
-import Auxiliar.Posicao;
+import Auxiliar.*;
+import Modelo.*;
 import java.util.ArrayList;
 
 /**
@@ -56,7 +54,7 @@ public class ControleDeJogo {
             eTemp = e.get(i); 
             if(eTemp == unElemento)
                 continue;
-            if(!eTemp.isbTransponivel()){
+            if(!eTemp.isbTransponivel() || eTemp.isbColecional()){
                 if(eTemp.getPosicao().estaNaMesmaPosicao(unElemento.getPosicao()))
                     return false;
             }
@@ -64,13 +62,13 @@ public class ControleDeJogo {
         return true;
     }
     
-    public boolean PersonagemMorreu(Elemento eTemp, Hero unHero){
+ /*   public boolean PersonagemMorreu(Elemento eTemp, Hero unHero){
         if(eTemp.getPosicao() == unHero.getPosicao()){
                 if(eTemp.isbMortal())
                     return true;
         }
         return false;
-    }
+    }*/
     
     
  /*   public boolean isThere(ArrayList<Elemento> e, Elemento unElemento ){
@@ -196,4 +194,33 @@ public class ControleDeJogo {
         }
         return false;
     }
+    
+/*    public int AndarNasSetas(ArrayList<Elemento> e, Hero unHero){
+        Elemento eTemp;
+        for(int i = 1; i < e.size(); i++){ 
+            eTemp = e.get(i);
+            if(eTemp.isbTravessia() && unHero.getbDirecao() == 0){
+                if(eTemp.getPosicao().getLinha() == (unHero.getPosicao().getLinha()-1) && eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna() && !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                    //unHero.moveUp();
+                    return i;
+                }
+            }else if(eTemp.isbTravessia() && unHero.getbDirecao() == 1){
+                if(eTemp.getPosicao().getLinha() == (unHero.getPosicao().getLinha()+1) && eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna() && !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                    //unHero.moveDown();
+                    return i;
+                }
+            }else if(eTemp.isbTravessia() && unHero.getbDirecao() == 2){
+                if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna()-1) && !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                    //unHero.moveLeft();
+                    return i;
+                }
+            }else if(eTemp.isbTravessia()  && unHero.getbDirecao() == 3){
+                if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna()+1) && !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)){
+                    //unHero.moveRight();
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }*/
 }

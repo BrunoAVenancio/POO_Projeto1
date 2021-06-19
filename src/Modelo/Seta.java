@@ -12,16 +12,32 @@ import Auxiliar.*;
  * @author jackal
  */
 public class Seta extends Elemento{
-    private int direcao;
     public Seta(String sNomeImagePNG, Posicao P1, int nDirecao){
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
         this.bTransponivel = false;
-        this.bRetiravel = false;
-        direcao = nDirecao;
+        this.bTravessia = true;        
+        this.bDirecao = nDirecao;
     }
     
     public void voltaAUltimaPosicao(){
         this.pPosicao.volta();
+    }
+    
+    public void Interacao(Hero unHero){
+        switch(this.bDirecao){
+            case 0:
+                unHero.moveUp();
+                break;
+            case 1:
+                unHero.moveDown();
+                break;
+            case 2:
+                unHero.moveLeft();
+                break;
+            case 3:
+                unHero.moveRight();
+                break;
+        }
     }
 }

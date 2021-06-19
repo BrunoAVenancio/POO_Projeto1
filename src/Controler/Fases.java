@@ -31,7 +31,7 @@ public class Fases extends ArrayList<Elemento>{
     public void setFase1(Hero unHero){
         numFase = 1;
         this.clear();
-       // unHero.setPosicao(4, 4);
+        unHero.setPosicao(4, 4);
         this.add(unHero);
         
         this.add(new Quadrado(Consts.QUADRADOVERMELHO, new Posicao(1,1)));
@@ -99,7 +99,7 @@ public class Fases extends ArrayList<Elemento>{
     public void setFase2(Hero unHero){
         numFase = 2;
         this.clear();
-      //  unHero.setPosicao(5, 5);
+        unHero.setPosicao(5, 5);
         this.add(unHero);
         
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(1,3)));
@@ -138,23 +138,23 @@ public class Fases extends ArrayList<Elemento>{
         this.add(new Seta(Consts.SETAPRABAIXO,new Posicao(7,2),1));
         this.add(new Seta(Consts.SETAPRABAIXO,new Posicao(7,4),1));
 
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(0,3),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(0,7),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(2,3),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(4,3),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(4,7),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(6,3),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(8,3),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(8,7),2));
-        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(10,7),2));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(0,3),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(0,7),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(2,3),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(4,3),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(4,7),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(6,3),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(8,3),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(8,7),3));
+        this.add(new Seta(Consts.SETAPRADIREITA,new Posicao(10,7),3));
 
-        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(2,5),3));
-        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(2,6),3));
-        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(2,7),3));
-        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(4,9),3));
-        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(4,10),3));
-        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(6,7),3));
-        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(10,3),3));
+        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(2,5),2));
+        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(2,6),2));
+        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(2,7),2));
+        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(4,9),2));
+        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(4,10),2));
+        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(6,7),2));
+        this.add(new Seta(Consts.SETAPRAESQUERDA,new Posicao(10,3),2));
         
         this.add(new Robo(Consts.ROBOAMARELO,new Posicao(1,1)));
         this.add(new Robo(Consts.ROBOROSA,new Posicao(9,1)));
@@ -170,7 +170,7 @@ public class Fases extends ArrayList<Elemento>{
     public void setFase3(Hero unHero){
         numFase = 3;
         this.clear();
-       // unHero.setPosicao(5, 5);
+        unHero.setPosicao(5, 5);
         this.add(unHero);
         
         this.add(new Bloco(Consts.BLOCOVERMELHO,new Posicao(1,1)));
@@ -236,8 +236,8 @@ public class Fases extends ArrayList<Elemento>{
     public void setFase4(Hero unHero){
         numFase = 4;
         this.clear();
+        unHero.setPosicao(5, 5);
         this.add(unHero);
-        //unHero.setPosicao(5, 5);
         
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(0,3)));
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(0,7)));
@@ -255,55 +255,60 @@ public class Fases extends ArrayList<Elemento>{
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(8,10)));
         this.add(new Quadrado(Consts.QUADRADOVERMELHO,new Posicao(10,1)));
 
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(1,1)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(1,3)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(1,5)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(1,7)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(1,9)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(2,2)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(2,4)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(2,6)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(2,8)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(3,1)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(3,3)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(3,5)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(3,7)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(3,9)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(4,2)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(4,4)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(4,6)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(4,8)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(5,1)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(5,3)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(5,7)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(5,9)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(6,2)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(6,4)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(6,6)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(6,8)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(7,1)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(7,3)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(7,5)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(7,7)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(7,9)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(8,2)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(8,4)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(8,6)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(8,8)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(9,1)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(9,3)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(9,5)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(9,7)));
-        this.add(new Quadrado(Consts.QUADRADOVERDE,new Posicao(9,9)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(1,1)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(1,3)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(1,5)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(1,7)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(1,9)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(2,2)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(2,4)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(2,6)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(2,8)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(3,1)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(3,3)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(3,5)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(3,7)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(3,9)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(4,2)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(4,4)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(4,6)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(4,8)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(5,1)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(5,3)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(5,7)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(5,9)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(6,2)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(6,4)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(6,6)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(6,8)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(7,1)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(7,3)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(7,5)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(7,7)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(7,9)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(8,2)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(8,4)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(8,6)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(8,8)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(9,1)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(9,3)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(9,5)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(9,7)));
+        this.add(new Quadrado1(Consts.QUADRADOVERDE,new Posicao(9,9)));
         
         this.add(new Robo(Consts.ROBOAMARELO,new Posicao(1,4)));
         this.add(new Robo(Consts.ROBOROSA,new Posicao(9,2)));
-        this.add(new Robo(Consts.ROBOVERDE,new Posicao(6,2)));
+        this.add(new Robo(Consts.ROBOVERDE,new Posicao(6,1)));
         this.add(new Robo(Consts.ROBOAZUL,new Posicao(6,9)));
         
         this.add(new FrutasConsumiveis(Consts.SOL,new Posicao(0,0)));
         this.add(new FrutasConsumiveis(Consts.CHAVE,new Posicao(10,10)));
         this.add(new FrutasConsumiveis(Consts.LAMPADA,new Posicao(0,10)));
         this.add(new FrutasConsumiveis(Consts.VELA,new Posicao(10,0)));
+    }
+    
+    public void setVitoria(){
+        numFase = 5;
+        this.clear();
     }
 }

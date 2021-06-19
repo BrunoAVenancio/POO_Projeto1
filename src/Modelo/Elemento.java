@@ -23,6 +23,7 @@ public abstract class Elemento implements Serializable {
     protected boolean bMovel;
     protected int bDirecao;
     protected boolean bColecional;
+    protected boolean bTravessia;
 
     /*Se encostar, morre?*/
 
@@ -53,7 +54,9 @@ public abstract class Elemento implements Serializable {
         this.bRetiravel = false;
         this.bMovel = false;
         this.bColecional = false;
-        this.bDirecao = 0;
+        this.bTravessia = false;
+        
+        this.bDirecao = -1;
         //iCurrentImage = 0;
         //iImages = new ImageIcon[4];
         try {
@@ -67,6 +70,10 @@ public abstract class Elemento implements Serializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public boolean isbTravessia() {
+        return bTravessia;
     }
 
     public Posicao getPosicao() {
@@ -118,40 +125,44 @@ public abstract class Elemento implements Serializable {
     }
 
     public boolean moveUp() {
+        //boolean statusMovimento = this.pPosicao.moveUp();
         this.bDirecao = 0;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return this.pPosicao.moveUp();
+        return /*statusMovimento;*/this.pPosicao.moveUp();
     }
 
     public boolean moveDown() {
+        //boolean statusMovimento = this.pPosicao.moveDown();
         this.bDirecao = 1;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return this.pPosicao.moveDown();
+        return /*statusMovimento;*/this.pPosicao.moveDown();
     }
 
     public boolean moveRight() {
+        //boolean statusMovimento = this.pPosicao.moveRight();
         this.bDirecao = 3;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return this.pPosicao.moveRight();
+        return /*statusMovimento;*/this.pPosicao.moveRight();
 
     }
 
     public boolean moveLeft() {
+        //boolean statusMovimento = this.pPosicao.moveLeft();
         this.bDirecao = 2;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return this.pPosicao.moveLeft();
+        return /*statusMovimento;*/this.pPosicao.moveLeft();
 
     }
 

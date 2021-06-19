@@ -49,10 +49,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
  /*O protagonista (heroi) necessariamente precisa estar na posicao 0 do array*/
         hHero = new Hero("Skooter1.png");
         /* https://www.online-image-editor.com/ */
-        hHero.setPosicao(4, 4);
+        //hHero.setPosicao(4, 4);
 
         Fase = new Fases(150);
-        Fase.setFase1(hHero);
+        Fase.setFase3(hHero);
         eElementos = Fase;
     }
 
@@ -71,6 +71,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/
     public void paint(Graphics gOld) {
+        Image newImage;
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         /*Criamos um contexto gráfico*/
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
@@ -80,7 +81,23 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             for (int j = 0; j < Consts.RES; j++) {
                 try {
                     /*Linha para alterar o background*/
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background.png");
+                    if(Fase.getNumFase() == 1){
+                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background.png");
+                       // g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                    }else if(Fase.getNumFase() == 2){
+                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background.png");
+                        //g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                    }else if(Fase.getNumFase() == 3){
+                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background3.png");
+                        //g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                    }else if(Fase.getNumFase() == 4){
+                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background4.png");
+                        //g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                    }else /*if(Fase.getNumFase() == 5)*/{
+                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Vitoria-550x550.png");
+                    }/*else{
+                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background.png");
+                    }*/
                     g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
 
                 } catch (IOException ex) {
@@ -100,6 +117,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 this.Fase.setFase3(hHero);
             }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 3){
                 this.Fase.setFase4(hHero);
+            }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 4){
+                this.eElementos.clear();
+                //this.Fase.setVitoria();
             }
         }
 
@@ -127,34 +147,54 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         /*Movimento do heroi via teclado*/
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             hHero.setbDirecao(0);
-            if (Fase.getNumFase() == 1) {
+            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
                 cControle.MoverElemento(eElementos, hHero);
                 cControle.ElementoColecionavel(eElementos, hHero);
+                hHero.moveUp();
+            }else if(Fase.getNumFase() == 2){
+                //cControle.AndarNasSetas(eElementos, hHero);
+                hHero.moveUp();
+            }else if(Fase.getNumFase() == 4){
+                hHero.moveUp();
             }
-            hHero.moveUp();
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             hHero.setbDirecao(1);
-            if (Fase.getNumFase() == 1) {
+            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
                 cControle.MoverElemento(eElementos, hHero);
                 cControle.ElementoColecionavel(eElementos, hHero);
+                hHero.moveDown();
+            }else if(Fase.getNumFase() == 2){
+                //cControle.AndarNasSetas(eElementos, hHero);
+                hHero.moveDown();
+            }else if(Fase.getNumFase() == 4){
+                hHero.moveDown();
             }
-            hHero.moveDown();
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             hHero.setbDirecao(2);
-            if (Fase.getNumFase() == 1) {
+            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
                 cControle.MoverElemento(eElementos, hHero);
                 cControle.ElementoColecionavel(eElementos, hHero);
+                hHero.moveLeft();
+            }else if(Fase.getNumFase() == 2){
+                //cControle.AndarNasSetas(eElementos, hHero);
+                hHero.moveLeft();
+            }else if(Fase.getNumFase() == 4){
+                hHero.moveLeft();
             }
-            hHero.moveLeft();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             hHero.setbDirecao(3);
-            if(Fase.getNumFase() == 1){
+            if(Fase.getNumFase() == 1 || Fase.getNumFase() == 3){
                 cControle.MoverElemento(eElementos, hHero);
                 cControle.ElementoColecionavel(eElementos, hHero);
+                hHero.moveRight();
+            }else if(Fase.getNumFase() == 2){
+                //cControle.AndarNasSetas(eElementos, hHero);
+                hHero.moveRight();
+            }else if(Fase.getNumFase() == 4){
+                hHero.moveRight();
             }
-            hHero.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            if(Fase.getNumFase() == 1){
+            if(Fase.getNumFase() == 1 || Fase.getNumFase() == 4){
                 switch(hHero.getbDirecao()){
                     case 0:
                         cControle.RemoveElemento(eElementos, hHero);

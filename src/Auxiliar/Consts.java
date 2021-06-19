@@ -33,6 +33,7 @@ public class Consts {
     public static final String VELA = "vela.png"; 
     public static final String CHAVE = "Chave.png"; 
     public static final String LAMPADA = "lampada.png"; 
+    public static final String VITORIA = "Vitoria-715x715.png"; 
     
 
 }
