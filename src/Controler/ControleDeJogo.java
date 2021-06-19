@@ -62,6 +62,32 @@ public class ControleDeJogo {
         return true;
     }
     
+        
+    public boolean MatarHeroi(Hero unHero, Fases fase, Robo unRobo){
+        if(unRobo.getbDirecao() == 0){
+            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha()-1 && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()){
+                fase.setFase1(unHero);
+                return true;
+            }
+        }else if(unRobo.getbDirecao() == 1){
+            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha()+1 && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()){
+                fase.setFase1(unHero);
+                return true;
+            }
+        }else if(unRobo.getbDirecao() == 2){
+            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha() && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()-1){
+                fase.setFase1(unHero);
+                return true;
+            }
+        }else if(unRobo.getbDirecao() == 3){
+            if(unHero.getPosicao().getLinha() == unRobo.getPosicao().getLinha() && unHero.getPosicao().getColuna() == unRobo.getPosicao().getColuna()+1){
+                fase.setFase1(unHero);
+                return true;    
+            }
+        }
+        return false;
+    }
+    
  /*   public boolean PersonagemMorreu(Elemento eTemp, Hero unHero){
         if(eTemp.getPosicao() == unHero.getPosicao()){
                 if(eTemp.isbMortal())

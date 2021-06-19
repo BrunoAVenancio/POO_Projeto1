@@ -236,6 +236,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         return cControle.ehPosicaoValida(this.eElementos, P1);
     }
 
+    public boolean matouHeroi(Robo unRobo){
+        return cControle.MatarHeroi(hHero, Fase, unRobo);
+    }
     /* public boolean RemoveElemento(ArrayList<Elemento> e, Hero unHero, int Direcao ){
         return cControle.RemoveElemento(this.eElementos, unHero);
     }
