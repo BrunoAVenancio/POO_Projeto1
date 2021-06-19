@@ -52,7 +52,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         //hHero.setPosicao(4, 4);
 
         Fase = new Fases(150);
-        Fase.setFase2(hHero);
+        Fase.setFase3(hHero);
         eElementos = Fase;
     }
 
@@ -144,64 +144,20 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     }
 
     public void keyPressed(KeyEvent e) {
+        boolean isMovement = false;
         /*Movimento do heroi via teclado*/
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             hHero.setbDirecao(0);
-            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
-                cControle.MoverElemento(eElementos, hHero);
-                cControle.ElementoColecionavel(eElementos, hHero);
-                hHero.moveUp();
-            }else if(Fase.getNumFase() == 2){
-                cControle.AndarNasSetas(eElementos, hHero);
-                //hHero.moveUp();
-                //cControle.PassouAsSetas(eElementos, hHero);
-                hHero.moveUp();
-                System.out.println("Direcao: " + hHero.getbDirecao());
-            }else if(Fase.getNumFase() == 4){
-                hHero.moveUp();
-            }
+            isMovement = true;
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             hHero.setbDirecao(1);
-            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
-                cControle.MoverElemento(eElementos, hHero);
-                cControle.ElementoColecionavel(eElementos, hHero);
-                hHero.moveDown();
-            }else if(Fase.getNumFase() == 2){
-                cControle.AndarNasSetas(eElementos, hHero);
-                //hHero.moveDown();
-                //cControle.PassouAsSetas(eElementos, hHero);
-                hHero.moveDown();
-            }else if(Fase.getNumFase() == 4){
-                hHero.moveDown();
-            }
+            isMovement = true;
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             hHero.setbDirecao(2);
-            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
-                cControle.MoverElemento(eElementos, hHero);
-                cControle.ElementoColecionavel(eElementos, hHero);
-                hHero.moveLeft();
-            }else if(Fase.getNumFase() == 2){
-                cControle.AndarNasSetas(eElementos, hHero);
-                //hHero.moveLeft();
-                //cControle.PassouAsSetas(eElementos, hHero);
-                hHero.moveLeft();
-            }else if(Fase.getNumFase() == 4){
-                hHero.moveLeft();
-            }
+            isMovement = true;
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             hHero.setbDirecao(3);
-            if(Fase.getNumFase() == 1 || Fase.getNumFase() == 3){
-                cControle.MoverElemento(eElementos, hHero);
-                cControle.ElementoColecionavel(eElementos, hHero);
-                hHero.moveRight();
-            }else if(Fase.getNumFase() == 2){
-                cControle.AndarNasSetas(eElementos, hHero);
-                //hHero.moveRight();
-                //cControle.PassouAsSetas(eElementos, hHero);
-                hHero.moveRight();
-            }else if(Fase.getNumFase() == 4){
-                hHero.moveRight();
-            }
+            isMovement = true;
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             if(Fase.getNumFase() == 1 || Fase.getNumFase() == 4){
                 switch(hHero.getbDirecao()){
@@ -219,20 +175,118 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                         break;
                 }
             }
- /*this.eElementos.clear();
-            hHero = new Hero("vacina.png");
-            hHero.setPosicao(0, 7);
-            this.addElemento(hHero);
-
-            CoronaVirus cTeste = new CoronaVirus("carro_azul.png");
-            cTeste.setPosicao(5, 5);
-            this.addElemento(cTeste);*/
         }
+        
+        if(isMovement){
+            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
+                cControle.MoverElemento(eElementos, hHero);
+                cControle.ElementoColecionavel(eElementos, hHero);
+                hHero.posicaoNovaDoHeroi();
+                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
+            }else if(Fase.getNumFase() == 2){
+                cControle.AndarNasSetas(eElementos, hHero);
+                //hHero.moveUp();
+                //cControle.PassouAsSetas(eElementos, hHero)
+                hHero.posicaoNovaDoHeroi();
+                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);;
+//                hHero.moveUp();
+                System.out.println("Direcao: " + hHero.getbDirecao());
+                }else if(Fase.getNumFase() == 4){
+                    hHero.posicaoNovaDoHeroi();
+                    cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
+//                hHero.moveUp();
+            }
+            isMovement = false;
+        }
+        
+//        if (e.getKeyCode() == KeyEvent.VK_UP) {
+//            hHero.setbDirecao(0);
+//            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
+//                cControle.MoverElemento(eElementos, hHero);
+//                cControle.ElementoColecionavel(eElementos, hHero);
+//                hHero.posicaoNovaDoHeroi();
+//            }else if(Fase.getNumFase() == 2){
+//                cControle.AndarNasSetas(eElementos, hHero);
+//                //hHero.moveUp();
+//                //cControle.PassouAsSetas(eElementos, hHero);
+//                hHero.moveUp();
+//                System.out.println("Direcao: " + hHero.getbDirecao());
+//            }else if(Fase.getNumFase() == 4){
+//                hHero.moveUp();
+//            }
+//        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+//            hHero.setbDirecao(1);
+//            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
+//                cControle.MoverElemento(eElementos, hHero);
+//                cControle.ElementoColecionavel(eElementos, hHero);
+//                hHero.moveDown();
+//            }else if(Fase.getNumFase() == 2){
+//                cControle.AndarNasSetas(eElementos, hHero);
+//                //hHero.moveDown();
+//                //cControle.PassouAsSetas(eElementos, hHero);
+//                hHero.moveDown();
+//            }else if(Fase.getNumFase() == 4){
+//                hHero.moveDown();
+//            }
+//        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+//            hHero.setbDirecao(2);
+//            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
+//                cControle.MoverElemento(eElementos, hHero);
+//                cControle.ElementoColecionavel(eElementos, hHero);
+//                hHero.moveLeft();
+//            }else if(Fase.getNumFase() == 2){
+//                cControle.AndarNasSetas(eElementos, hHero);
+//                //hHero.moveLeft();
+//                //cControle.PassouAsSetas(eElementos, hHero);
+//                hHero.moveLeft();
+//            }else if(Fase.getNumFase() == 4){
+//                hHero.moveLeft();
+//            }
+//        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+//            hHero.setbDirecao(3);
+//            if(Fase.getNumFase() == 1 || Fase.getNumFase() == 3){
+//                cControle.MoverElemento(eElementos, hHero);
+//                cControle.ElementoColecionavel(eElementos, hHero);
+//                hHero.moveRight();
+//            }else if(Fase.getNumFase() == 2){
+//                cControle.AndarNasSetas(eElementos, hHero);
+//                //hHero.moveRight();
+//                //cControle.PassouAsSetas(eElementos, hHero);
+//                hHero.moveRight();
+//            }else if(Fase.getNumFase() == 4){
+//                hHero.moveRight();
+//            }
+//        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+//            if(Fase.getNumFase() == 1 || Fase.getNumFase() == 4){
+//                switch(hHero.getbDirecao()){
+//                    case 0:
+//                        cControle.RemoveElemento(eElementos, hHero);
+//                        break;
+//                    case 1:
+//                        cControle.RemoveElemento(eElementos, hHero);
+//                        break;
+//                    case 2:
+//                        cControle.RemoveElemento(eElementos, hHero);
+//                        break;
+//                    case 3:
+//                        cControle.RemoveElemento(eElementos, hHero);
+//                        break;
+//                }
+//            }
+// /*this.eElementos.clear();
+//            hHero = new Hero("vacina.png");
+//            hHero.setPosicao(0, 7);
+//            this.addElemento(hHero);
+//
+//            CoronaVirus cTeste = new CoronaVirus("carro_azul.png");
+//            cTeste.setPosicao(5, 5);
+//            this.addElemento(cTeste);*/
+//        }
 
         /*Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava*/
-        if (!cControle.ehPosicaoValida/*RelativoUmPersonagem*/(this.eElementos,/*hHero*/ hHero.getPosicao())) {
-            hHero.voltaAUltimaPosicao();
-        }
+//        if (!cControle.ehPosicaoValida/*RelativoUmPersonagem*/(this.eElementos,/*hHero*/ hHero.getPosicao())) {
+//            hHero.voltaAUltimaPosicao();
+//        }
 
         this.setTitle("-> Cell: " + (hHero.getPosicao().getColuna()) + ", " + (hHero.getPosicao().getLinha()));
     }

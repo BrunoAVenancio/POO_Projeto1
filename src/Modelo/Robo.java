@@ -18,7 +18,6 @@ public class Robo extends Elemento  implements Serializable{
     int iDirecao = (new Random()).nextInt(4);
     int linhaNova;
     int colunaNova;
-    boolean impacado = false;
     int contadorDeInercia = Auxiliar.Consts.ROBOT_MOVE_FRAME_INTERVAL;
     public Robo(String sNomeImagePNG, Posicao P1){
         super(sNomeImagePNG);
@@ -51,7 +50,7 @@ public class Robo extends Elemento  implements Serializable{
         colunaNova = this.pPosicao.getColuna();
         
         this.posicaoNovaDoRobo();
-        while(!Desenhador.getTelaDoJogo().ehPosicaoValidaAoRobo(linhaNova,colunaNova)){
+        if(!Desenhador.getTelaDoJogo().ehPosicaoValidaAoRobo(linhaNova,colunaNova)){
             //Reseta a posiciao inicial
             linhaNova = this.pPosicao.getLinha();
             colunaNova = this.pPosicao.getColuna();

@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * @author junio
  */
 public class ControleDeJogo {
-    private int vidas;
     public void desenhaTudo(ArrayList<Elemento> e){
         for(int i = 0; i < e.size(); i++){
             e.get(i).autoDesenho();
@@ -40,14 +39,6 @@ public class ControleDeJogo {
         return true;
     }
 
-    public int getVidas() {
-        return vidas;
-    }
-
-    public void setVidas(int vidas) {
-        this.vidas = vidas;
-    }
-    
     public boolean ehPosicaoValidaRelativoUmPersonagem(ArrayList<Elemento> e, Elemento unElemento ){
         Elemento eTemp;
         for(int i = 1; i < e.size(); i++){
@@ -61,6 +52,34 @@ public class ControleDeJogo {
         }
         return true;
     }
+    
+    //Move heroi, movimentar a uma posicao e interagir de acordo com o obstaculo que esta na mesma posicao
+    public boolean moverHeroi(ArrayList<Elemento> e,int linha, int coluna, Hero unHero, Fases fase){
+        Elemento eTemp;
+        if(linha < 0 || linha > 10 || coluna < 0 || coluna > 10){
+            return false;
+        }
+        Hero heroTemp = new Hero("");
+        heroTemp.setPosicao(linha, coluna);
+        for(int i = 1; i < e.size(); i++){
+            eTemp = e.get(i); 
+            if(eTemp.isbRobo()){
+                if(eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())){
+                    unHero.setNumeroDeVida(unHero.getNumeroDeVida()-1);
+                    fase.resetarFase(unHero);
+                    return false;
+                }
+            }
+            if(!eTemp.isbTransponivel() && !eTemp.isbColecional()){
+                if(eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())){
+                    return false;
+                }
+            }
+        }
+        unHero.setPosicao(linha, coluna);
+        return true;
+    }
+    
     
         
     public boolean ehPosicaoValidaAoRobo(ArrayList<Elemento> e,  int linha, int coluna){
@@ -82,6 +101,7 @@ public class ControleDeJogo {
         
     public boolean MatarHeroi(Hero unHero, Fases fase, Robo unRobo){
         if(unHero.getPosicao().estaNaMesmaPosicao(unRobo.getPosicao())){
+            unHero.setNumeroDeVida(unHero.getNumeroDeVida()-1);
             fase.resetarFase(unHero);
             return true;
         }
