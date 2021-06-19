@@ -24,7 +24,7 @@ public class Seta extends Elemento{
         this.pPosicao.volta();
     }
     
-    public void Interacao(Hero unHero){
+    /*public void Interacao(Hero unHero){
         switch(this.bDirecao){
             case 0:
                 unHero.moveUp();
@@ -39,5 +39,5 @@ public class Seta extends Elemento{
                 unHero.moveRight();
                 break;
         }
-    }
+    }*/
 }

@@ -52,7 +52,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         //hHero.setPosicao(4, 4);
 
         Fase = new Fases(150);
-        Fase.setFase3(hHero);
+        Fase.setFase2(hHero);
         eElementos = Fase;
     }
 
@@ -152,8 +152,11 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 cControle.ElementoColecionavel(eElementos, hHero);
                 hHero.moveUp();
             }else if(Fase.getNumFase() == 2){
-                //cControle.AndarNasSetas(eElementos, hHero);
+                cControle.AndarNasSetas(eElementos, hHero);
+                //hHero.moveUp();
+                //cControle.PassouAsSetas(eElementos, hHero);
                 hHero.moveUp();
+                System.out.println("Direcao: " + hHero.getbDirecao());
             }else if(Fase.getNumFase() == 4){
                 hHero.moveUp();
             }
@@ -164,7 +167,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 cControle.ElementoColecionavel(eElementos, hHero);
                 hHero.moveDown();
             }else if(Fase.getNumFase() == 2){
-                //cControle.AndarNasSetas(eElementos, hHero);
+                cControle.AndarNasSetas(eElementos, hHero);
+                //hHero.moveDown();
+                //cControle.PassouAsSetas(eElementos, hHero);
                 hHero.moveDown();
             }else if(Fase.getNumFase() == 4){
                 hHero.moveDown();
@@ -176,7 +181,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 cControle.ElementoColecionavel(eElementos, hHero);
                 hHero.moveLeft();
             }else if(Fase.getNumFase() == 2){
-                //cControle.AndarNasSetas(eElementos, hHero);
+                cControle.AndarNasSetas(eElementos, hHero);
+                //hHero.moveLeft();
+                //cControle.PassouAsSetas(eElementos, hHero);
                 hHero.moveLeft();
             }else if(Fase.getNumFase() == 4){
                 hHero.moveLeft();
@@ -188,7 +195,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 cControle.ElementoColecionavel(eElementos, hHero);
                 hHero.moveRight();
             }else if(Fase.getNumFase() == 2){
-                //cControle.AndarNasSetas(eElementos, hHero);
+                cControle.AndarNasSetas(eElementos, hHero);
+                //hHero.moveRight();
+                //cControle.PassouAsSetas(eElementos, hHero);
                 hHero.moveRight();
             }else if(Fase.getNumFase() == 4){
                 hHero.moveRight();
