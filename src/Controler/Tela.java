@@ -184,7 +184,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 hHero.posicaoNovaDoHeroi();
                 cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
             }else if(Fase.getNumFase() == 2){
-                cControle.AndarNasSetas(eElementos, hHero);
+                cControle.AndarNasSetas(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
                 //hHero.moveUp();
                 //cControle.PassouAsSetas(eElementos, hHero)
                 hHero.posicaoNovaDoHeroi();

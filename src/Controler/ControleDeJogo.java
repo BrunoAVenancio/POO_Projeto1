@@ -240,8 +240,8 @@ public class ControleDeJogo {
         return false;
     }
     
-    public boolean AndarNasSetas(ArrayList<Elemento> e, Hero unHero){
-        Elemento eTemp;
+    public boolean AndarNasSetas(/*ArrayList<Elemento> e, Hero unHero*/ArrayList<Elemento> e,int linha, int coluna, Hero unHero, Fases fase){
+        /*Elemento eTemp;
         for(int i = 1; i < e.size(); i++){ 
             eTemp = e.get(i);
             if(eTemp.isbTravessia() && unHero.getbDirecao() == 0 && eTemp.getbDirecao() == unHero.getbDirecao()){
@@ -282,29 +282,70 @@ public class ControleDeJogo {
                 }
             }
         }
-        return false;
+        return false;*/
+        
+        Elemento eTemp;
+        if(linha < 0 || linha > 10 || coluna < 0 || coluna > 10){
+            return false;
+        }
+        Hero heroTemp = new Hero("");
+        heroTemp.setPosicao(linha, coluna);
+        for(int i = 1; i < e.size(); i++){
+            eTemp = e.get(i); 
+            if(eTemp.isbTravessia()){
+                if(eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())){
+                    /*unHero.setNumeroDeVida(unHero.getNumeroDeVida()-1);
+                    fase.resetarFase(unHero);*/
+                    if(unHero.getbDirecao() == 0 && eTemp.getbDirecao() == unHero.getbDirecao()){
+                        eTemp.setbTransponivel(true);
+                        unHero.moveUp();
+                        return false;
+                    }else if(unHero.getbDirecao() == 1 && eTemp.getbDirecao() == unHero.getbDirecao()){
+                        eTemp.setbTransponivel(true);
+                        unHero.moveDown();
+                        return false;
+                    }else if(unHero.getbDirecao() == 2 && eTemp.getbDirecao() == unHero.getbDirecao()){
+                        eTemp.setbTransponivel(true);
+                        unHero.moveLeft();
+                        return false;
+                    }else if(unHero.getbDirecao() == 3 && eTemp.getbDirecao() == unHero.getbDirecao()){
+                        eTemp.setbTransponivel(true);
+                        unHero.moveRight();
+                        return false;
+                    }
+                }else{
+                    eTemp.setbTransponivel(false);
+                }
+            }
+            if(!eTemp.isbTransponivel() && !eTemp.isbColecional()){
+                if(eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
-    public boolean PassouAsSetas(ArrayList<Elemento> e, Hero unHero){
+   /* public boolean PassouAsSetas(ArrayList<Elemento> e, Hero unHero){
         Elemento eTemp;
         for(int i = 1; i < e.size(); i++){ 
             eTemp = e.get(i);
-            if(eTemp.isbTravessia() && /*unHero.getbDirecao() == 0 &&*/ unHero.getbDirecao() == eTemp.getbDirecao()){
+            if(eTemp.isbTravessia() &&  unHero.getbDirecao() == eTemp.getbDirecao()){
                 if(eTemp.getPosicao().getLinha() == (unHero.getPosicao().getLinha()+1) && eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna() && eTemp.getbDirecao() == unHero.getbDirecao()){
                     eTemp.setbTransponivel(false);
                     return true;
                 }
-            }else if(eTemp.isbTravessia() && /*unHero.getbDirecao() == 1 &&*/ unHero.getbDirecao() == eTemp.getbDirecao()){
+            }else if(eTemp.isbTravessia() &&  unHero.getbDirecao() == eTemp.getbDirecao()){
                 if(eTemp.getPosicao().getLinha() == (unHero.getPosicao().getLinha()-1) && eTemp.getPosicao().getColuna() == unHero.getPosicao().getColuna() && eTemp.getbDirecao() == unHero.getbDirecao()){
                     eTemp.setbTransponivel(false);
                     return true;
                 }
-            }else if(eTemp.isbTravessia() && /*unHero.getbDirecao() == 2 &&*/ unHero.getbDirecao() == eTemp.getbDirecao()){
+            }else if(eTemp.isbTravessia() &&  unHero.getbDirecao() == eTemp.getbDirecao()){
                 if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna()+1) && eTemp.getbDirecao() == unHero.getbDirecao()){
                     eTemp.setbTransponivel(false);
                     return true;
                 }
-            }else if(eTemp.isbTravessia()  && /*unHero.getbDirecao() == 3 &&*/ unHero.getbDirecao() == eTemp.getbDirecao()){
+            }else if(eTemp.isbTravessia()  && unHero.getbDirecao() == eTemp.getbDirecao()){
                 if(eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna()-1) && eTemp.getbDirecao() == unHero.getbDirecao()){
                     eTemp.setbTransponivel(false);
                     return true;
@@ -312,5 +353,5 @@ public class ControleDeJogo {
             }
         }
         return false;
-    }
+    }*/
 }
