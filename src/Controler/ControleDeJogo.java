@@ -90,7 +90,7 @@ public class ControleDeJogo {
         Robo roboTemp = new Robo(Consts.ROBOROSA,new Posicao(linha,coluna));
         for(int i = 1; i < e.size(); i++){
             eTemp = e.get(i); 
-            if(!eTemp.isbTransponivel() || eTemp.isbColecional()){
+            if(eTemp.isbTravessia() || !eTemp.isbTransponivel() || eTemp.isbColecional()){
                 if(eTemp.getPosicao().estaNaMesmaPosicao(roboTemp.getPosicao())){
                     return false;
                 }
