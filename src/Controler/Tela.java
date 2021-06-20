@@ -52,7 +52,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         //hHero.setPosicao(4, 4);
 
         Fase = new Fases(150);
-        Fase.setFase2(hHero);
+        Fase.setFase4(hHero);
         eElementos = Fase;
     }
 
@@ -93,6 +93,8 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                     }else if(Fase.getNumFase() == 4){
                         newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background4.png");
                         //g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                    }else if(Fase.getNumFase() == 0 || Fase.getNumFase() == 5){
+                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background0.png");
                     }else /*if(Fase.getNumFase() == 5)*/{
                         newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Vitoria-550x550.png");
                     }/*else{
@@ -111,15 +113,17 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             this.cControle.desenhaTudo(eElementos);
             this.cControle.processaTudo(eElementos);
             
-            if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 1){
+            if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 1 && hHero.getNumeroDeVida() != 0){
                 this.Fase.setFase2(hHero);
-            }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 2){
+            }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 2 && hHero.getNumeroDeVida() != 0){
                 this.Fase.setFase3(hHero);
-            }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 3){
+            }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 3 && hHero.getNumeroDeVida() != 0){
                 this.Fase.setFase4(hHero);
-            }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 4){
-                this.eElementos.clear();
-                //this.Fase.setVitoria();
+            }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 4 && hHero.getNumeroDeVida() != 0){
+                this.Fase.setVitoria(hHero);
+            }else if(hHero.getNumeroDeVida() == 0){
+                //this.eElementos.clear();
+                this.Fase.setDerrota(hHero);
             }
         }
 

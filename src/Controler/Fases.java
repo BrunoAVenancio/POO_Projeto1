@@ -307,13 +307,42 @@ public class Fases extends ArrayList<Elemento>{
         this.add(new FrutasConsumiveis(Consts.VELA,new Posicao(10,0)));
     }
     
-    public void setVitoria(){
+    public void setVitoria(Hero unHero){
         numFase = 5;
         this.clear();
+        unHero.setPosicao(9,5);
+        this.add(unHero);
+        this.add(new Quadrado("LetraP.png",new Posicao(5,2)));
+        this.add(new Quadrado("Letra_a.png",new Posicao(5,3)));
+        this.add(new Quadrado("Letra_r.png",new Posicao(5,4)));
+        this.add(new Quadrado("Letra_a.png",new Posicao(5,5)));
+        this.add(new Quadrado("Letra_b.png",new Posicao(5,6)));
+        this.add(new Quadrado("Letra_e.png",new Posicao(5,7)));
+        this.add(new Quadrado("Letra_n.png",new Posicao(5,8)));
+        this.add(new Quadrado("Letra_s.png",new Posicao(5,9)));
+    
+    }
+    
+    public void setDerrota(Hero unHero){
+        numFase = 0;
+        this.clear();
+        unHero.setPosicao(9,5);
+        this.add(unHero);
+        this.add(new Quadrado("LetraG.png",new Posicao(5,1)));
+        this.add(new Quadrado("Letra_a.png",new Posicao(5,2)));
+        this.add(new Quadrado("Letra_m.png",new Posicao(5,3)));
+        this.add(new Quadrado("Letra_e.png",new Posicao(5,4)));
+        this.add(new Quadrado("LetraO.png",new Posicao(5,6)));
+        this.add(new Quadrado("Letra_v.png",new Posicao(5,7)));
+        this.add(new Quadrado("Letra_e.png",new Posicao(5,8)));
+        this.add(new Quadrado("Letra_r.png",new Posicao(5,9)));
     }
     
     public void resetarFase(Hero unHero){
         switch(numFase){
+            case 0:
+                this.setDerrota(unHero);
+                break;
             case 1:
                 this.setFase1(unHero);
                 break;
@@ -325,6 +354,9 @@ public class Fases extends ArrayList<Elemento>{
                 break;
             case 4:
                 this.setFase4(unHero);
+                break;
+            case 5:
+                this.setVitoria(unHero);
                 break;
         }
     }
