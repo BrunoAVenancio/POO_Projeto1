@@ -203,12 +203,12 @@ public class ControleDeJogo {
                     e.remove(i);
                     return true;
                 }
-            } else if (eTemp.isbMovel() && unHero.getbDirecao() == 2) { //MESMA VERIFICAÇÃO ACIMA, PORÉM QUANDO HEROI SE MOVIMENTA PARA ESQUERDA
+            } else if (eTemp.isbColecional() && unHero.getbDirecao() == 2) { //MESMA VERIFICAÇÃO ACIMA, PORÉM QUANDO HEROI SE MOVIMENTA PARA ESQUERDA
                 if (eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna() - 1) && !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)) {
                     e.remove(i);
                     return true;
                 }
-            } else if (eTemp.isbMovel() && unHero.getbDirecao() == 3) { //MESMA VERIFICAÇÃO ACIMA, PORÉM QUANDO HEROI SE MOVIMENTA PARA DIREITA
+            } else if (eTemp.isbColecional() && unHero.getbDirecao() == 3) { //MESMA VERIFICAÇÃO ACIMA, PORÉM QUANDO HEROI SE MOVIMENTA PARA DIREITA
                 if (eTemp.getPosicao().getLinha() == unHero.getPosicao().getLinha() && eTemp.getPosicao().getColuna() == (unHero.getPosicao().getColuna() + 1) && !this.ehPosicaoValidaRelativoUmPersonagem(e, unHero)) {
                     e.remove(i);
                     return true;
@@ -239,27 +239,31 @@ public class ControleDeJogo {
         heroTemp.setPosicao(linha, coluna);
         for (int i = 1; i < e.size(); i++) { //VARRE O ARRAY DE ELEMENTOS
             eTemp = e.get(i);
-            if (eTemp.isbTravessia()) { //VERIFICA SE O ELEMENTO É ATRAVESSÁVLE
-                if (eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())) { 
+            if (eTemp.isbTravessia()) { //VERIFICA SE O ELEMENTO É ATRAVESSÁVEL
+                if (eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())) { //EM CASO DE SOBREPOSIÇÃO 
                     if (unHero.getbDirecao() == 0 && eTemp.getbDirecao() == unHero.getbDirecao()) {
-                        eTemp.setbTransponivel(true);
-                        unHero.moveUp();
-                        return false;
+                        //VERIFICA SE DIREÇÃO DO HEROI E DA SETA SÃO PARA CIMA
+                        eTemp.setbTransponivel(true); // TORNA A SETA TRANSPONÍVEL
+                        unHero.moveUp();//MOVE O HEROI
+                        return false; //RETORNA FALSE QUANDO HEROI TRANSPOS
                     } else if (unHero.getbDirecao() == 1 && eTemp.getbDirecao() == unHero.getbDirecao()) {
+                        //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA BAIXO
                         eTemp.setbTransponivel(true);
                         unHero.moveDown();
                         return false;
                     } else if (unHero.getbDirecao() == 2 && eTemp.getbDirecao() == unHero.getbDirecao()) {
+                        //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA ESQUERDA
                         eTemp.setbTransponivel(true);
                         unHero.moveLeft();
                         return false;
                     } else if (unHero.getbDirecao() == 3 && eTemp.getbDirecao() == unHero.getbDirecao()) {
+                        //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA DIREITA
                         eTemp.setbTransponivel(true);
                         unHero.moveRight();
                         return false;
                     }
-                } else {
-                    eTemp.setbTransponivel(false);
+                } else { //SE ELEMENTO NAO ATRAVESSÁVEL NÃO É SOBREPOSTO
+                    eTemp.setbTransponivel(false); //TORNA-O INSTRANSPOVÍVEL
                 }
             }
             if (!eTemp.isbTransponivel() && !eTemp.isbColecional()) { //CASO ELEMENTO SEJA INSTRANSPONÍVEL OU COLECIONÁVEL VERIFICA SOBREPOSIÇÃO
