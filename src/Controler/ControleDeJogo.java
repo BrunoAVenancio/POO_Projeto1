@@ -13,9 +13,6 @@ public class ControleDeJogo {
 
     //INSTRUCAO PARA DESENHAR TODOS OS ELEMENTOS DO ARRAY
     public void desenhaTudo(ArrayList<Elemento> e) {
-        /*for (int i = 0; i < e.size(); i++) {
-            e.get(i).autoDesenho();
-        }*/
         for (int i = e.size()-1; i >=0; i--) {
             e.get(i).autoDesenho();
         }
@@ -74,7 +71,7 @@ public class ControleDeJogo {
                     return false; //RETORNA FALSO QUANDO HEROI ESBARRA EM MONSTRO
                 }
             }
-            if (!eTemp.isbTransponivel() && !eTemp.isbColecional()) { //SE OBJETO É INSTRANSPONÍVEL OU COLECIONÁVEL RETORNA FALSE TAMBÉM
+            if ((!eTemp.isbTransponivel() && (!eTemp.isbTravessia()) || eTemp.getbDirecao() != unHero.getbDirecao()) && !eTemp.isbColecional() ) { //SE OBJETO É INSTRANSPONÍVEL OU COLECIONÁVEL RETORNA FALSE TAMBÉM
                 if (eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())) {
                     return false;
                 }
@@ -246,23 +243,27 @@ public class ControleDeJogo {
                 if (eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())) { //EM CASO DE SOBREPOSIÇÃO 
                     if (unHero.getbDirecao() == 0 && eTemp.getbDirecao() == unHero.getbDirecao()) {
                         //VERIFICA SE DIREÇÃO DO HEROI E DA SETA SÃO PARA CIMA
+                        //unHero.moveUp();//MOVE O HEROI
                         eTemp.setbTransponivel(true); // TORNA A SETA TRANSPONÍVEL
-                        unHero.moveUp();//MOVE O HEROI
+                        //unHero.moveUp();//MOVE O HEROI
                         return false; //RETORNA FALSE QUANDO HEROI TRANSPOS
                     } else if (unHero.getbDirecao() == 1 && eTemp.getbDirecao() == unHero.getbDirecao()) {
                         //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA BAIXO
+                        //unHero.moveDown();//MOVE O HEROI
                         eTemp.setbTransponivel(true);
-                        unHero.moveDown();
+                        //unHero.moveDown();
                         return false;
                     } else if (unHero.getbDirecao() == 2 && eTemp.getbDirecao() == unHero.getbDirecao()) {
                         //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA ESQUERDA
+                        //unHero.moveLeft();//MOVE O HEROI
                         eTemp.setbTransponivel(true);
-                        unHero.moveLeft();
+                        //unHero.moveLeft();
                         return false;
                     } else if (unHero.getbDirecao() == 3 && eTemp.getbDirecao() == unHero.getbDirecao()) {
                         //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA DIREITA
+                        //unHero.moveRight();//MOVE O HEROI
                         eTemp.setbTransponivel(true);
-                        unHero.moveRight();
+                        //unHero.moveRight();
                         return false;
                     }
                 } else { //SE ELEMENTO NAO ATRAVESSÁVEL NÃO É SOBREPOSTO
