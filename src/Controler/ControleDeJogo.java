@@ -13,7 +13,10 @@ public class ControleDeJogo {
 
     //INSTRUCAO PARA DESENHAR TODOS OS ELEMENTOS DO ARRAY
     public void desenhaTudo(ArrayList<Elemento> e) {
-        for (int i = 0; i < e.size(); i++) {
+        /*for (int i = 0; i < e.size(); i++) {
+            e.get(i).autoDesenho();
+        }*/
+        for (int i = e.size()-1; i >=0; i--) {
             e.get(i).autoDesenho();
         }
     }
