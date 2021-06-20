@@ -2,6 +2,7 @@ package Auxiliar;
 
 import java.io.Serializable;
 
+//CLASSE RESPONSAVEL POR DETERMINAR E VALIDAR AS POSICOES DOS ELEMENTOS
 public class Posicao implements Serializable{
     private int	linha;
     private int coluna;
@@ -14,12 +15,12 @@ public class Posicao implements Serializable{
     }
 
     public boolean setPosicao(int linha, int coluna){       
-        if(linha < 0 || linha >= Auxiliar.Consts.RES)
+        if(linha < 0 || linha >= Auxiliar.Consts.DIMENSAO_TELA)
             return false;
         linhaAnterior = this.linha;
         this.linha = linha;
         
-        if(coluna < 0 || coluna >= Auxiliar.Consts.RES)
+        if(coluna < 0 || coluna >= Auxiliar.Consts.DIMENSAO_TELA)
             return false;
         colunaAnterior = this.coluna;
         this.coluna = coluna;

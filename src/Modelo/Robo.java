@@ -1,24 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 import Auxiliar.*;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- *
- * @author jackal
- */
 public class Robo extends Elemento  implements Serializable{
     Random r;
     int iDirecao = (new Random()).nextInt(4);
     int linhaNova;
     int colunaNova;
-    int contadorDeInercia = Auxiliar.Consts.ROBOT_MOVE_FRAME_INTERVAL;
+    int contadorDeInercia = Auxiliar.Consts.INTERVALO_FRAME_MOVIMENTODOROBO; // REGULADOR DE VELOCIDADE DO ROBO
     public Robo(String sNomeImagePNG, Posicao P1){
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
@@ -28,6 +19,7 @@ public class Robo extends Elemento  implements Serializable{
         r = new Random();
     }
     
+    //REPOSICIONA O ROBO
     public void posicaoNovaDoRobo(){
         switch(this.iDirecao){
                 case 0:
@@ -45,6 +37,7 @@ public class Robo extends Elemento  implements Serializable{
             }
     }
     
+    //INSTRUÇÃO PARA DESENHAR O ROBO, QUANDO POSSÍVEL
     public void autoDesenho(){
         linhaNova = this.pPosicao.getLinha();
         colunaNova = this.pPosicao.getColuna();
@@ -61,7 +54,7 @@ public class Robo extends Elemento  implements Serializable{
             this.posicaoNovaDoRobo();
             contadorDeInercia++;     
         }
-        if(Desenhador.getTelaDoJogo().ehPosicaoValidaAoRobo(linhaNova,colunaNova) && contadorDeInercia > Auxiliar.Consts.ROBOT_MOVE_FRAME_INTERVAL){
+        if(Desenhador.getTelaDoJogo().ehPosicaoValidaAoRobo(linhaNova,colunaNova) && contadorDeInercia > Auxiliar.Consts.INTERVALO_FRAME_MOVIMENTODOROBO){
             this.pPosicao.setPosicao(linhaNova, colunaNova);
             Desenhador.getTelaDoJogo().matouHeroi(this);
             contadorDeInercia = 0; 

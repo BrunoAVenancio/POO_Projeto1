@@ -7,13 +7,14 @@ import java.io.File;
  * @author Junio
  */ 
 public class Consts {
-    public static final int CELL_SIDE = 60;
-    public static final int RES = 11;
-    public static final int FRAME_INTERVAL = 100;   
-    public static final int TIMER_DISPARO = 20; /*Em numero de frames (redesenhos)*/
-    public static final int ROBOT_MOVE_FRAME_INTERVAL = 4;
+    public static final int TAMANHO_CELULA = 60; //tamanho de cada elemento da matriz tela
+    public static final int DIMENSAO_TELA = 11; //valor correspondente ao n da matriz quadrada que é a tela
+    public static final int INTERVALO_FRAME = 100;  //tempo entre cada frame exibido 
+    public static final int INTERVALO_FRAME_MOVIMENTODOROBO = 4;
     public static final String PATH = File.separator+"imgs"+File.separator;
-    public static final String BORDA = "bricks.png";
+    
+    /*determinando arquivos de imagens uSados no jogo como constantes, para facilitar
+    caso queira trocar*/
     public static final String QUADRADOVERMELHO = "quadradovermelho.png";
     public static final String QUADRADOVERDE = "quadradoverde.png";    
     public static final String SETAPRACIMA = "SetaCima.png";    
@@ -35,6 +36,4 @@ public class Consts {
     public static final String CHAVE = "Chave.png"; 
     public static final String LAMPADA = "lampada.png"; 
     public static final String VITORIA = "Vitoria-715x715.png"; 
-    
-
 }

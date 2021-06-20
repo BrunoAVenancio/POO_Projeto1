@@ -20,52 +20,32 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     private ControleDeJogo cControle = new ControleDeJogo();
     private Graphics g2;
 
-    /**
-     * Creates new form
-     */
     public Tela() {
         Desenhador.setCenario(this);
-        /*Desenhador funciona no modo estatico*/
+        
         initComponents();
 
         this.addMouseListener(this);
-        /*mouse*/
+        
         this.addKeyListener(this);
-        /*teclado*/
-
-
- /*Cria a janela do tamanho do cenario + insets (bordas) da janela*/
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
-                Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        
+        /*Cria a janela do tamanho do cenario + insets (bordas) da janela*/
+        this.setSize(Consts.DIMENSAO_TELA * Consts.TAMANHO_CELULA + getInsets().left + getInsets().right,
+                Consts.DIMENSAO_TELA * Consts.TAMANHO_CELULA + getInsets().top + getInsets().bottom);
 
         /*Este array vai guardar os elementos graficos*/
         eElementos = new ArrayList<Elemento>(150);
-        /*String[] arrayDeImagens = new String[3];
-        arrayDeImagens[0] = "Skooter1.png";
-        arrayDeImagens[1] = "Skooter3.png";
-        arrayDeImagens[2] = "Skooter2.png";*/
-
- /*Cria eElementos adiciona elementos*/
- /*O protagonista (heroi) necessariamente precisa estar na posicao 0 do array*/
+        
+        /*CRIANDO PROTAGONISTA, necessariamente precisa estar na posicao 0 do array*/
         hHero = new Hero("Skooter1.png");
-        /* https://www.online-image-editor.com/ */
-        //hHero.setPosicao(4, 4);
-
+        
+        //INICIA O JOGO NA FASE1
         Fase = new Fases(150);
-        Fase.setFase4(hHero);
-        eElementos = Fase;
+        Fase.setFase1(hHero);
+        eElementos = Fase; //ADICIONA OS ELEMENTOS DA FASE1 NO ARRAY DE ELEMENTOS
     }
 
-    /*--------------------------------------------------*/
-    public void addElemento(Elemento umElemento) {
-        eElementos.add(umElemento);
-    }
-
-    public void removeElemento(Elemento umElemento) {
-        eElementos.remove(umElemento);
-    }
-
-    public Graphics getGraphicsBuffer() {
+     public Graphics getGraphicsBuffer() {
         return g2;
     }
 
@@ -77,30 +57,22 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
 
         /*Desenha cenário*/
-        for (int i = 0; i < Consts.RES; i++) {
-            for (int j = 0; j < Consts.RES; j++) {
+        for (int i = 0; i < Consts.DIMENSAO_TELA; i++) {
+            for (int j = 0; j < Consts.DIMENSAO_TELA; j++) {
                 try {
                     /*Linha para alterar o background*/
                     if(Fase.getNumFase() == 1){
                         newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background.png");
-                       // g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
                     }else if(Fase.getNumFase() == 2){
                         newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background.png");
-                        //g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
                     }else if(Fase.getNumFase() == 3){
                         newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background3.png");
-                        //g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
                     }else if(Fase.getNumFase() == 4){
                         newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background4.png");
-                        //g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-                    }else if(Fase.getNumFase() == 0 || Fase.getNumFase() == 5){
+                    }else{
                         newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Background0.png");
-                    }else /*if(Fase.getNumFase() == 5)*/{
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Vitoria-550x550.png");
-                    }/*else{
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background.png");
-                    }*/
-                    g2.drawImage(newImage, j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                    }
+                    g2.drawImage(newImage, j * Consts.TAMANHO_CELULA, i * Consts.TAMANHO_CELULA, Consts.TAMANHO_CELULA, Consts.TAMANHO_CELULA, null);
 
                 } catch (IOException ex) {
                     Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,21 +80,27 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             }
         }
 
-        /*Aqui podem ser inseridos novos processamentos de controle*/
-        if (!this.eElementos.isEmpty()) {
-            this.cControle.desenhaTudo(eElementos);
-            this.cControle.processaTudo(eElementos);
+        
+        if (!this.eElementos.isEmpty()) { //SE ARRAY DE ELEMENTOS NÃO ESTÁ VAZIO
+            this.cControle.desenhaTudo(eElementos); //DESENHA TUDO
+            this.cControle.processaTudo(eElementos); //VERIFICA TODOS OS ELEMENTOS
             
-            if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 1 && hHero.getNumeroDeVida() != 0){
+            /*APÓS JOGO INICIADO VERIFICA SE OS COLECIONÁVEIS DA FASE FORAM PEGOS OU SE O HEROI NÃO PERDEU
+            TODAS AS VIDAS E SETA A PRÓXIMA FASE OU MOSTRA MENSAGEM DE VITÓRIA OU DERROTA*/
+            if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 1 && hHero.getNumeroDeVida() != 0){ 
+                //CASO TERMINE FASE 1
                 this.Fase.setFase2(hHero);
             }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 2 && hHero.getNumeroDeVida() != 0){
+                //CASO TERMINE FASE 2
                 this.Fase.setFase3(hHero);
             }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 3 && hHero.getNumeroDeVida() != 0){
+                //CASO TERMINE FASE 3
                 this.Fase.setFase4(hHero);
             }else if(!this.cControle.ahColecionaveisAinda(eElementos) && Fase.getNumFase() == 4 && hHero.getNumeroDeVida() != 0){
+                //CASO TERMINE FASE 4
                 this.Fase.setVitoria(hHero);
-            }else if(hHero.getNumeroDeVida() == 0){
-                //this.eElementos.clear();
+            }else if(hHero.getNumeroDeVida() == 0){ 
+                //CASO PERCA TODAS AS VIDAS
                 this.Fase.setDerrota(hHero);
             }
         }
@@ -144,7 +122,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
         /*Redesenha (executa o metodo paint) tudo a cada Consts.FRAME_INTERVAL milissegundos*/
         Timer timer = new Timer();
-        timer.schedule(redesenhar, 0, Consts.FRAME_INTERVAL);
+        timer.schedule(redesenhar, 0, Consts.INTERVALO_FRAME);
     }
 
     public void keyPressed(KeyEvent e) {
@@ -162,7 +140,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             hHero.setbDirecao(3);
             isMovement = true;
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {//TECLA SPACE RETIRA OS ELEMENTOS QUANDO POSSÍVEL
             if(Fase.getNumFase() == 1 || Fase.getNumFase() == 4){
                 switch(hHero.getbDirecao()){
                     case 0:
@@ -181,158 +159,46 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             }
         }
         
+        //VERIFICA SE HÁ MOVIMENTAÇÃO E COMO PROCEDER
         if(isMovement){
-            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
-                cControle.MoverElemento(eElementos, hHero);
-                cControle.ElementoColecionavel(eElementos, hHero);
-                hHero.posicaoNovaDoHeroi();
-                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
-            }else if(Fase.getNumFase() == 2){
+            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) { //NAS FASE 1 E 3
+                cControle.MoverElemento(eElementos, hHero); //VERIFICA SE HEROI ESTÁ MOVENDO ELEMENTO MÓVEL
+                cControle.ElementoColecionavel(eElementos, hHero); //VERIFICA SE HEROI ESTÁ PEGADO ELEMENTO COLECIONÁVEL
+                hHero.posicaoNovaDoHeroi(); //VERIFICA NOVA POSIÇÃO DO HEROI
+                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase); //REPOSICIONA O HEROI
+            }else if(Fase.getNumFase() == 2){ //NA FASE 2
+                //VERIFICA SE O HEROI ESTÁ INTERAGINDO CORRETAMENTE COM AS SETAS
                 cControle.AndarNasSetas(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
-                //hHero.moveUp();
-                //cControle.PassouAsSetas(eElementos, hHero)
-                hHero.posicaoNovaDoHeroi();
-                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);;
-//                hHero.moveUp();
-                System.out.println("Direcao: " + hHero.getbDirecao());
-                }else if(Fase.getNumFase() == 4){
-                    hHero.posicaoNovaDoHeroi();
-                    cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
-//                hHero.moveUp();
+                hHero.posicaoNovaDoHeroi();//VERIFICA NOVA POSIÇÃO DO HEROI
+                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase); //REPOSICIONA O HEROI
+            }else if(Fase.getNumFase() == 4){ //NA FASE 4
+                hHero.posicaoNovaDoHeroi(); //VERIFICA NOVA POSIÇÃO DO HEROI
+                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase); //REPOSICIONA O HEROI
             }
             isMovement = false;
         }
         
-//        if (e.getKeyCode() == KeyEvent.VK_UP) {
-//            hHero.setbDirecao(0);
-//            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
-//                cControle.MoverElemento(eElementos, hHero);
-//                cControle.ElementoColecionavel(eElementos, hHero);
-//                hHero.posicaoNovaDoHeroi();
-//            }else if(Fase.getNumFase() == 2){
-//                cControle.AndarNasSetas(eElementos, hHero);
-//                //hHero.moveUp();
-//                //cControle.PassouAsSetas(eElementos, hHero);
-//                hHero.moveUp();
-//                System.out.println("Direcao: " + hHero.getbDirecao());
-//            }else if(Fase.getNumFase() == 4){
-//                hHero.moveUp();
-//            }
-//        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//            hHero.setbDirecao(1);
-//            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
-//                cControle.MoverElemento(eElementos, hHero);
-//                cControle.ElementoColecionavel(eElementos, hHero);
-//                hHero.moveDown();
-//            }else if(Fase.getNumFase() == 2){
-//                cControle.AndarNasSetas(eElementos, hHero);
-//                //hHero.moveDown();
-//                //cControle.PassouAsSetas(eElementos, hHero);
-//                hHero.moveDown();
-//            }else if(Fase.getNumFase() == 4){
-//                hHero.moveDown();
-//            }
-//        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//            hHero.setbDirecao(2);
-//            if (Fase.getNumFase() == 1 || Fase.getNumFase() == 3) {
-//                cControle.MoverElemento(eElementos, hHero);
-//                cControle.ElementoColecionavel(eElementos, hHero);
-//                hHero.moveLeft();
-//            }else if(Fase.getNumFase() == 2){
-//                cControle.AndarNasSetas(eElementos, hHero);
-//                //hHero.moveLeft();
-//                //cControle.PassouAsSetas(eElementos, hHero);
-//                hHero.moveLeft();
-//            }else if(Fase.getNumFase() == 4){
-//                hHero.moveLeft();
-//            }
-//        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//            hHero.setbDirecao(3);
-//            if(Fase.getNumFase() == 1 || Fase.getNumFase() == 3){
-//                cControle.MoverElemento(eElementos, hHero);
-//                cControle.ElementoColecionavel(eElementos, hHero);
-//                hHero.moveRight();
-//            }else if(Fase.getNumFase() == 2){
-//                cControle.AndarNasSetas(eElementos, hHero);
-//                //hHero.moveRight();
-//                //cControle.PassouAsSetas(eElementos, hHero);
-//                hHero.moveRight();
-//            }else if(Fase.getNumFase() == 4){
-//                hHero.moveRight();
-//            }
-//        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-//            if(Fase.getNumFase() == 1 || Fase.getNumFase() == 4){
-//                switch(hHero.getbDirecao()){
-//                    case 0:
-//                        cControle.RemoveElemento(eElementos, hHero);
-//                        break;
-//                    case 1:
-//                        cControle.RemoveElemento(eElementos, hHero);
-//                        break;
-//                    case 2:
-//                        cControle.RemoveElemento(eElementos, hHero);
-//                        break;
-//                    case 3:
-//                        cControle.RemoveElemento(eElementos, hHero);
-//                        break;
-//                }
-//            }
-// /*this.eElementos.clear();
-//            hHero = new Hero("vacina.png");
-//            hHero.setPosicao(0, 7);
-//            this.addElemento(hHero);
-//
-//            CoronaVirus cTeste = new CoronaVirus("carro_azul.png");
-//            cTeste.setPosicao(5, 5);
-//            this.addElemento(cTeste);*/
-//        }
-
-        /*Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava*/
-//        if (!cControle.ehPosicaoValida/*RelativoUmPersonagem*/(this.eElementos,/*hHero*/ hHero.getPosicao())) {
-//            hHero.voltaAUltimaPosicao();
-//        }
-
         this.setTitle("-> Cell: " + (hHero.getPosicao().getColuna()) + ", " + (hHero.getPosicao().getLinha()));
     }
 
+    //UTILIZANDO INSTRUÇÃO DE VALIDAÇÃO DE MOVIMENTO DA CLASSE CONTROLE DE JOGO NA CLASSE TELA
     public boolean ehPosicaoValidaRelativoUmPersonagem(Elemento unPersona) {
         return cControle.ehPosicaoValidaRelativoUmPersonagem(this.eElementos, unPersona);
     }
-
-    public boolean ehPosicaoValida(Posicao P1) {
-        return cControle.ehPosicaoValida(this.eElementos, P1);
-    }
     
+    //UTILIZANDO INSTRUÇÃO DE VALIDAÇÃO DE MOVIMENTO DO ROBO DA CLASSE CONTROLE DE JOGO NA CLASSE TELA
     public boolean ehPosicaoValidaAoRobo(int linha, int coluna){
         return cControle.ehPosicaoValidaAoRobo(this.eElementos, linha, coluna);
     }
 
+    //UTILIZANDO INSTRUÇÃO DE COLISÃO DO HEROI COM ROBO DA CLASSE CONTROLE DE JOGO NA CLASSE TELA
     public boolean matouHeroi(Robo unRobo){
         return cControle.MatarHeroi(hHero, Fase, unRobo);
     }
-    /* public boolean RemoveElemento(ArrayList<Elemento> e, Hero unHero, int Direcao ){
-        return cControle.RemoveElemento(this.eElementos, unHero);
-    }
     
-    public boolean MoverElemento(ArrayList<Elemento> e, Hero unHero, int Direcao ){
-        return cControle.MoverElemento(this.eElementos, unHero);
-    }*/
+    //INSTRUÇÕES PARA USO DE MOUSE, NÃO FORAM UTILIZADAS
     public void mousePressed(MouseEvent e) {
-        /*//Movimento via mouse
-         int x = e.getX();
-         int y = e.getY();
-     
-         this.setTitle("X: "+ x + ", Y: " + y +
-         " -> Cell: " + (y/Consts.CELL_SIDE) + ", " + (x/Consts.CELL_SIDE));
-        
-         this.hHero.getPosicao().setPosicao(y/Consts.CELL_SIDE, x/Consts.CELL_SIDE);
 
-        //Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava
-        if (!cControle.ehPosicaoValida(this.eElementos,hHero.getPosicao())) {
-            hHero.voltaAUltimaPosicao();
-        }         
-         
-        repaint();*/
     }
 
     /**

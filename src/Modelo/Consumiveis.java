@@ -2,14 +2,12 @@ package Modelo;
 
 import Auxiliar.Posicao;
 
-public class Bloco extends Elemento {
-    public Bloco(String sNomeImagePNG, Posicao P1){
+public class Consumiveis extends Elemento {
+    public Consumiveis(String sNomeImagePNG, Posicao P1){
         super(sNomeImagePNG);
         this.setPosicao(P1.getLinha(), P1.getColuna());
-        this.bTransponivel = false;
-        this.bRetiravel = true;
-        this.bMovel = true;
-        
+        this.bRetiravel = false;
+        this.bColecional = true;
     }
     
     public void voltaAUltimaPosicao(){

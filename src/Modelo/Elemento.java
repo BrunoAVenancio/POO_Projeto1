@@ -14,60 +14,35 @@ import javax.swing.ImageIcon;
  */
 public abstract class Elemento implements Serializable {
 
-    protected ImageIcon iImages;
-    protected int iCurrentImage;
-    protected Posicao pPosicao;
-    protected boolean bTransponivel;
-    protected boolean bRetiravel;
-    protected boolean bMortal;
-    protected boolean bMovel;
-    protected int bDirecao;
-    protected boolean bColecional;
-    protected boolean bTravessia;
-    protected boolean bRobo;
+    protected ImageIcon iImages; //VARIÁVEL PARA SALVAR IMAGEM DO ELEMENTO
+    protected Posicao pPosicao; //VARIÁVEL PARA SALVAR A POSIÇÃO DO ELEMENTO
+    protected boolean bTransponivel; //INFORMA SE ELEMENTO É TRANSPONÍVEL
+    protected boolean bRetiravel; //INFORMA SE ELEMENTO É RETIRÁVEL
+    protected boolean bMortal; //INFORMA SE ELEMENTO É MORTAL
+    protected boolean bMovel; //INFORMA SE ELEMENTO É MÓVEL
+    protected int bDirecao; //INFORMA A DIREÇÃO DO ELEMENTO, QUANDO NECESSÁRIO
+    protected boolean bColecional; //INFORMA SE ELEMENTO É COLECIONÁVLE
+    protected boolean bTravessia; //INFORMA SE ELEMENTO É ATRAVESSÁVEL
+    protected boolean bRobo; //INFORMA SE ELEMENTO É UM ROBO
 
-
-    /*Se encostar, morre?*/
-
-    /*protected Elemento(String[] sNomeImagePNG) {
-        this.pPosicao = new Posicao(1, 1);
-        this.bTransponivel = true;
-        this.bMortal = false;
-        iCurrentImage = 0;
-        //iImages = new ImageIcon[4];
-        try {
-            for (int i = 0; i < sNomeImagePNG.length; i++) {
-                iImages[i] = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
-                Image img = iImages[iCurrentImage].getImage();
-                BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
-                Graphics g = bi.createGraphics();
-                g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-                iImages[iCurrentImage] = new ImageIcon(bi);
-            }
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }*/
-
-    protected Elemento(String sNomeImagePNG) {
-        this.pPosicao = new Posicao(1, 1);
+protected Elemento(String sNomeImagePNG) {
+        this.pPosicao = new Posicao(1, 1); //SETANDO CONFIGURAÇÕES INICIAIS PADRÕES DOS ELEMENTOS
         this.bTransponivel = true;
         this.bMortal = false;
         this.bRetiravel = false;
         this.bMovel = false;
         this.bColecional = false;
         this.bTravessia = false;
-        
         this.bDirecao = -1;
-        //iCurrentImage = 0;
-        //iImages = new ImageIcon[4];
+        
+        //ATRIBUINDO IMAGEM AO ELEMENTO
         try {
-            iImages/*[iCurrentImage]*/ = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
-            Image img = iImages/*[iCurrentImage]*/.getImage();
-            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+            iImages = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
+            Image img = iImages.getImage();
+            BufferedImage bi = new BufferedImage(Consts.TAMANHO_CELULA, Consts.TAMANHO_CELULA, BufferedImage.TYPE_INT_ARGB);
             Graphics g = bi.createGraphics();
-            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-            iImages/*[iCurrentImage]*/ = new ImageIcon(bi);
+            g.drawImage(img, 0, 0, Consts.TAMANHO_CELULA, Consts.TAMANHO_CELULA, null);
+            iImages = new ImageIcon(bi);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -86,10 +61,6 @@ public abstract class Elemento implements Serializable {
         return bColecional;
     }
     
-    public int getiCurrentImage() {
-        return iCurrentImage;
-    }
-
     public boolean isbMovel() {
         return bMovel;
     }
@@ -112,10 +83,6 @@ public abstract class Elemento implements Serializable {
         this.bDirecao = bDirecao;
     }
     
-    public void setiCurrentImage(int iCurrentImage) {
-        this.iCurrentImage = iCurrentImage;
-    }
-
     public boolean isbTransponivel() {
         return bTransponivel;
     }
@@ -128,48 +95,49 @@ public abstract class Elemento implements Serializable {
         return pPosicao.setPosicao(linha, coluna);
     }
 
+    //MOVIMENTO O ELEMENTO PARA CIMA, QUANDO POSSÍVEL
     public boolean moveUp() {
-        //boolean statusMovimento = this.pPosicao.moveUp();
         this.bDirecao = 0;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return /*statusMovimento;*/this.pPosicao.moveUp();
+        return this.pPosicao.moveUp();
     }
 
+    //MOVIMENTO O ELEMENTO PARA BAIXO, QUANDO POSSÍVEL
     public boolean moveDown() {
-        //boolean statusMovimento = this.pPosicao.moveDown();
         this.bDirecao = 1;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return /*statusMovimento;*/this.pPosicao.moveDown();
+        return this.pPosicao.moveDown();
     }
 
+    //MOVIMENTO O ELEMENTO PARA DIREITA, QUANDO POSSÍVEL
     public boolean moveRight() {
-        //boolean statusMovimento = this.pPosicao.moveRight();
         this.bDirecao = 3;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return /*statusMovimento;*/this.pPosicao.moveRight();
+        return this.pPosicao.moveRight();
 
     }
 
+    //MOVIMENTO O ELEMENTO PARA ESQUERDA, QUANDO POSSÍVEL
     public boolean moveLeft() {
-        //boolean statusMovimento = this.pPosicao.moveLeft();
         this.bDirecao = 2;
         if(!Desenhador.getTelaDoJogo().ehPosicaoValidaRelativoUmPersonagem(this)){
             this.getPosicao().volta();
             return false;
         }
-        return /*statusMovimento;*/this.pPosicao.moveLeft();
+        return this.pPosicao.moveLeft();
 
     }
 
+    //INSTRUÇÃO PARA DESENHAR O ELEMENTO
     public void autoDesenho() {
         Desenhador.desenhar(this.iImages, pPosicao.getColuna(), pPosicao.getLinha());
     }

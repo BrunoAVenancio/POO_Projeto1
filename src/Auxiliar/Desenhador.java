@@ -9,6 +9,8 @@ import Controler.Tela;
  *
  * @author junio
  */
+
+//CLASSE RESPONSAVEL POR DESENHAR OS ELEMENTOS
 public class Desenhador implements Serializable {
     static Tela tCenarioOndeSeDesenha;
     public static void setCenario(Tela umTCenarioOndeDesenhar) {
@@ -20,7 +22,7 @@ public class Desenhador implements Serializable {
     }
     
     public static void desenhar(ImageIcon iImage, int iColuna, int iLinha) {
-        iImage.paintIcon(tCenarioOndeSeDesenha,getGraphicsDaTela(),iColuna * Consts.CELL_SIDE, iLinha * Consts.CELL_SIDE);
+        iImage.paintIcon(tCenarioOndeSeDesenha,getGraphicsDaTela(),iColuna * Consts.TAMANHO_CELULA, iLinha * Consts.TAMANHO_CELULA);
     }
     
     /*private, entao eh usaddo soh aqui dentro*/
