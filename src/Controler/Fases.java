@@ -351,6 +351,7 @@ public class Fases extends ArrayList<Elemento>{
     
     //INSTRUÇÃO PARA RESETAR A FASE QUANDO HEROI MORRE PRO ROBO
     public void resetarFase(Hero unHero){
+        System.out.println("Vida do Heroi: " + unHero.getNumeroDeVida());
         switch(numFase){
             case 0:
                 this.setDerrota(unHero);

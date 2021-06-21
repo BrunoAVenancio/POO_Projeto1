@@ -42,6 +42,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         //INICIA O JOGO NA FASE1
         Fase = new Fases(150);
         Fase.setFase1(hHero);
+        System.out.println("Vida do Heroi: " + hHero.getNumeroDeVida());
         eElementos = Fase; //ADICIONA OS ELEMENTOS DA FASE1 NO ARRAY DE ELEMENTOS
     }
 
@@ -167,10 +168,12 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 hHero.posicaoNovaDoHeroi(); //VERIFICA NOVA POSIÇÃO DO HEROI
                 cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase); //REPOSICIONA O HEROI
             }else if(Fase.getNumFase() == 2){ //NA FASE 2
+                boolean continuarMovimento = true; // USADO PARA VERIFICAR SE O HEROI PRECISA CONTIUAR MOVIMENTANDO, CASO SUBA EM SETAS
                 //VERIFICA SE O HEROI ESTÁ INTERAGINDO CORRETAMENTE COM AS SETAS
-                cControle.AndarNasSetas(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase);
-                hHero.posicaoNovaDoHeroi();//VERIFICA NOVA POSIÇÃO DO HEROI
-                cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase); //REPOSICIONA O HEROI
+                while(continuarMovimento){
+                    hHero.posicaoNovaDoHeroi();//VERIFICA NOVA POSIÇÃO DO HEROI
+                    continuarMovimento = cControle.moverHeroiNaFaseComSetas(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase); //REPOSICIONA O HEROI   
+                }
             }else if(Fase.getNumFase() == 4){ //NA FASE 4
                 hHero.posicaoNovaDoHeroi(); //VERIFICA NOVA POSIÇÃO DO HEROI
                 cControle.moverHeroi(eElementos, hHero.getLinhaNova(), hHero.getColunaNova(), hHero, Fase); //REPOSICIONA O HEROI

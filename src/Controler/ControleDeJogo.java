@@ -228,54 +228,52 @@ public class ControleDeJogo {
         }
         return false; //RETORNA FALSE QUANDO NÃO ENCONTRA ELEMENTO COLECIONÁVEL NO ARRAY
     }
+    
+    //USADO NA FASE 2 DAS SETAS, PARA VERIFICAR SE AS DIRECOES DO HEROI E DA SETA QUE IRA SUBIR SAO OPOSTAS, SE FOR , RETORNA TRUE PARA IMPEDIR QUE O HEROI SUBA NELA
+    public boolean saoDirecoesOpostas(int direcaoHeroi,  int direcaoSeta){
+        if(direcaoHeroi == 0 && direcaoSeta == 1)
+            return true;
+        else if(direcaoHeroi == 1 && direcaoSeta == 0)
+            return true;
+        else if(direcaoHeroi == 2 && direcaoSeta == 3)
+            return true;
+        else if(direcaoHeroi == 3 && direcaoSeta == 2)
+            return true;
+                    
+        return false;
+    }
 
-    //INSTRUCAO PARA MOVIMENTAR O HEROI PELAS SETAS DA FASE 2
-    public boolean AndarNasSetas(ArrayList<Elemento> e, int linha, int coluna, Hero unHero, Fases fase) {
+        //INSTRUCAO PARA MOVIMENTAR O HEROI PELAS SETAS DA FASE 2, SOMENTE RETORNA TRUE SE ANDAR EM CIMA DE UMA SETA
+    public boolean moverHeroiNaFaseComSetas(ArrayList<Elemento> e, int linha, int coluna, Hero unHero, Fases fase) {
         Elemento eTemp;
-        if (linha < 0 || linha > 10 || coluna < 0 || coluna > 10) { //VERIFICA SE A POSIÇÃO É VÁLIDA
-            return false;
+        if (linha < 0 || linha > 10 || coluna < 0 || coluna > 10) { //VERIFICA SE A POSIÇÃO FORNECIDA ESTA DENTRO DOS LIMITES DE TELA
+            return false; //RETORNA FALSA SE A POSIÇÃO É INVÁLIDA
         }
         Hero heroTemp = new Hero("");
         heroTemp.setPosicao(linha, coluna);
-        for (int i = 1; i < e.size(); i++) { //VARRE O ARRAY DE ELEMENTOS
+        for (int i = 1; i < e.size(); i++) {  //VARRE ARRAY DE ELEMENTOS
             eTemp = e.get(i);
-            if (eTemp.isbTravessia()) { //VERIFICA SE O ELEMENTO É ATRAVESSÁVEL
-                if (eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())) { //EM CASO DE SOBREPOSIÇÃO 
-                    if (unHero.getbDirecao() == 0 && eTemp.getbDirecao() == unHero.getbDirecao()) {
-                        //VERIFICA SE DIREÇÃO DO HEROI E DA SETA SÃO PARA CIMA
-                        //unHero.moveUp();//MOVE O HEROI
-                        eTemp.setbTransponivel(true); // TORNA A SETA TRANSPONÍVEL
-                        //unHero.moveUp();//MOVE O HEROI
-                        return false; //RETORNA FALSE QUANDO HEROI TRANSPOS
-                    } else if (unHero.getbDirecao() == 1 && eTemp.getbDirecao() == unHero.getbDirecao()) {
-                        //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA BAIXO
-                        //unHero.moveDown();//MOVE O HEROI
-                        eTemp.setbTransponivel(true);
-                        //unHero.moveDown();
-                        return false;
-                    } else if (unHero.getbDirecao() == 2 && eTemp.getbDirecao() == unHero.getbDirecao()) {
-                        //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA ESQUERDA
-                        //unHero.moveLeft();//MOVE O HEROI
-                        eTemp.setbTransponivel(true);
-                        //unHero.moveLeft();
-                        return false;
-                    } else if (unHero.getbDirecao() == 3 && eTemp.getbDirecao() == unHero.getbDirecao()) {
-                        //MESMA VERIFICAÇÃO, PORÉM COM MOVIEMNTO PARA DIREITA
-                        //unHero.moveRight();//MOVE O HEROI
-                        eTemp.setbTransponivel(true);
-                        //unHero.moveRight();
-                        return false;
-                    }
-                } else { //SE ELEMENTO NAO ATRAVESSÁVEL NÃO É SOBREPOSTO
-                    eTemp.setbTransponivel(false); //TORNA-O INSTRANSPOVÍVEL
+            if (eTemp.isbRobo()) { //VERIFICA SE O ELEMENTO É UM ROBO
+                if (eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())) { //VALIDA A SOBREPOSIÇÃO
+                    unHero.setNumeroDeVida(unHero.getNumeroDeVida() - 1); //ELEIMINA VIDA EM ENCONTRO COM ROBO
+                    fase.resetarFase(unHero); //RESETA A FASE AO INÍCIO
+                    return false; //RETORNA FALSO QUANDO HEROI ESBARRA EM MONSTRO
                 }
             }
-            if (!eTemp.isbTransponivel() && !eTemp.isbColecional()) { //CASO ELEMENTO SEJA INSTRANSPONÍVEL OU COLECIONÁVEL VERIFICA SOBREPOSIÇÃO
+            else if(eTemp.isbTravessia()){ //VERIFICA SE É UMA SETA
+                if(eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao()) && !(saoDirecoesOpostas(unHero.getbDirecao(),eTemp.getbDirecao()))){
+                    unHero.setPosicao(linha, coluna); //REPOSICIONA O HEROI A POSICAO INFORMADA
+                    unHero.setbDirecao(eTemp.getbDirecao()); //SETA A NOVA DIRECAO DO HEROI CONFORME ONDE A SETA APONTA
+                    return true;
+                }
+            }
+            if (!eTemp.isbTransponivel()  && !eTemp.isbColecional() ) { //SE OBJETO É INSTRANSPONÍVEL OU COLECIONÁVEL RETORNA FALSE TAMBÉM
                 if (eTemp.getPosicao().estaNaMesmaPosicao(heroTemp.getPosicao())) {
-                    return false; //RETORNA FALSE QUANDO POSIÇÃO É INVÁLIDA
+                    return false;
                 }
             }
         }
-        return true; //RETORNA TRUE QUANDO CONSEGUE ANDAR NAS SETAS
+        unHero.setPosicao(linha, coluna); //REPOSICIONA O HEROI A POSICAO INFORMADA
+        return false; 
     }
 }
