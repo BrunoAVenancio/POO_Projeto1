@@ -276,4 +276,13 @@ public class ControleDeJogo {
         unHero.setPosicao(linha, coluna); //REPOSICIONA O HEROI A POSICAO INFORMADA
         return false; 
     }
+    
+    public void RodarJogo(ArrayList<Elemento> e, Hero unHero, Fases Fase,Boolean Inicio) {
+        if(Inicio){
+            Fase.setInicio(unHero);
+        }else{
+            Fase.setFase1(unHero);
+        }
+        e = Fase; 
+    }
 }

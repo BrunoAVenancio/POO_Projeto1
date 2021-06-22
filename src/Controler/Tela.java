@@ -19,8 +19,11 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     private Fases Fase;
     private ControleDeJogo cControle = new ControleDeJogo();
     private Graphics g2;
+    private boolean Comeco;
 
     public Tela() {
+        
+        Comeco = false;
         Desenhador.setCenario(this);
         
         initComponents();
@@ -38,12 +41,17 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         
         /*CRIANDO PROTAGONISTA, necessariamente precisa estar na posicao 0 do array*/
         hHero = new Hero("Skooter1.png");
+        Fase = new Fases(150);
         
         //INICIA O JOGO NA FASE1
-        Fase = new Fases(150);
-        Fase.setFase1(hHero);
-        System.out.println("Vida do Heroi: " + hHero.getNumeroDeVida());
-        eElementos = Fase; //ADICIONA OS ELEMENTOS DA FASE1 NO ARRAY DE ELEMENTOS
+        if(this.Comeco){
+            Fase.setFase1(hHero);
+            System.out.println("Vida do Heroi: " + hHero.getNumeroDeVida());
+            
+        }else{
+            Fase.setInicio(hHero);
+        }
+        eElementos = Fase; //ADICIONA OS ELEMENTOS DA FASE1 NO ARRAY DE ELEMENTOS*/
     }
 
      public Graphics getGraphicsBuffer() {
@@ -157,6 +165,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                         cControle.RemoveElemento(eElementos, hHero);
                         break;
                 }
+            }else if (Fase.getNumFase() == -1){
+                this.Comeco = true;
+                Fase.setFase1(hHero);
             }
         }
         
